@@ -40,6 +40,11 @@ const moviesSchema = new mongoose.Schema(
         date : {
             type : String,
             required : true
+        },
+        
+        img : {
+            type : String,
+            required : true
         }
     }
 )
