@@ -3,10 +3,12 @@ const path = require('path');
 const Movies = require('./models/moviesModel');
 const Theatres = require('./models/theatresModel');
 const Users = require('./models/usersModel');
+const cors = require('cors');
 const app = express();
 
 app.use(express.static('public'));
 app.use(express.urlencoded({extended:false}));
+app.use(cors());
 
 Movies.find().then(movies => {console.log(movies);})
 Theatres.find().then(theatres => {console.log(theatres);})
