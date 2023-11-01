@@ -6,7 +6,7 @@ const Theatres = require('./models/theatresModel');
 const Users = require('./models/usersModel');
 const cors = require('cors');
 const Members = require('./models/membersModel');
-
+const cors = require('cors');
 const app = express();
 
 app.use(express.static('public'));

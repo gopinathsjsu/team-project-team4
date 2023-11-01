@@ -6,9 +6,14 @@ function Signup() {
 
             <h2>Sign Up for Movie Theatre</h2>
             <form>
-                <input type="text" placeholder="Username" className="auth-input" />
+                <input type="text" placeholder="First Name" className="auth-input" />
+                <input type="text" placeholder="Last Name" className="auth-input" />
                 <input type="email" placeholder="Email Address" className="auth-input" />
+                <input type="text" placeholder="Phone Number" className="auth-input" />
+                <input type="text" placeholder="Username" className="auth-input" />
                 <input type="password" placeholder="Password" className="auth-input" />
+                
+                
 
                 <div className="membership-type">
                     <label>Membership Type: </label>
