@@ -1,53 +1,49 @@
 const mongoose = require('mongoose');
 
-const moviesSchema = new mongoose.Schema(
+const membersSchema = new mongoose.Schema(
     {
-        movie_id : {
+        member_id : {
             type : Number,
             required : true
         },
 
-        movieName : {
+        firstName : {
             type : String,
             required : true
         },
 
-        status : {
+        lastName : {
             type : String,
             required : true
         },
 
-        description : {
+        email : {
             type : String,
             required : true
         },
 
-        language : {
-            type : String,
-            required : true
-        },
-
-        length : {
-            type : String,
-            required : true
-        },
-
-        rating : {
-            type : String,
-            required : true
-        },
-
-        date : {
+        phone : {
             type : String,
             required : true
         },
         
-        img : {
+        username : {
             type : String,
+            required : true
+        },
+        
+        password : {
+            type : String,
+            required : true
+        },
+
+        role : {
+            type : String,
+            required : true
         }
     }
 )
 
-const Movies = mongoose.model("movies", moviesSchema);
+const Members = mongoose.model("members", membersSchema);
 
-module.exports = Movies;
+module.exports = Members;
