@@ -19,7 +19,8 @@ const membersSchema = new mongoose.Schema(
 
         email : {
             type : String,
-            required : true
+            required : true,
+            unique: true
         },
 
         phone : {
@@ -29,7 +30,8 @@ const membersSchema = new mongoose.Schema(
         
         username : {
             type : String,
-            required : true
+            required : true,
+            unique: true
         },
         
         password : {
