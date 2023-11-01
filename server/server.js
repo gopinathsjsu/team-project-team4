@@ -2,6 +2,8 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const registrationRoutes = require('./endpointRoutes/registrationEndpoint');
+const regularMembersRoutes = require('./endpointRoutes/regularMembersEndpoint');
+const premiumMembersRoutes = require('./endpointRoutes/premiumMembersEndpoint');
 
 const app = express();
 
@@ -23,6 +25,8 @@ async function connect() {
 app.use(express.json()); // Using the built-in JSON parser from Express
 app.use(registrationRoutes);
 
+app.use(regularMembersRoutes);
+app.use(premiumMembersRoutes);
 // Global error handler
 app.use((err, req, res, next) => {
     console.error(err.stack);
