@@ -4,8 +4,10 @@ const bodyParser = require('body-parser');
 const Movies = require('./models/moviesModel');
 const Theatres = require('./models/theatresModel');
 const Users = require('./models/usersModel');
-const cors = require('cors');
 const Members = require('./models/membersModel');
+const registrationRoutes = require('./endpointRoutes/registrationEndpoint');
+const regularMembersRoutes = require('./endpointRoutes/regularMembersEndpoint');
+const premiumMembersRoutes = require('./endpointRoutes/premiumMembersEndpoint');
 const cors = require('cors');
 const app = express();
 
@@ -36,7 +38,6 @@ app.get('/movies/:id', async (request, response) => {
 });
 
 app.post('/movies', async (request, response) => {
-    // console.log(request)
     try {
         console.log(request.body);
         if (
@@ -67,6 +68,9 @@ app.post('/movies', async (request, response) => {
     }
 });
 
+app.use(registrationRoutes);
+app.use(regularMembersRoutes);
+app.use(premiumMembersRoutes);
 
 Movies.find().then(movies => {console.log(movies);})
 Theatres.find().then(theatres => {console.log(theatres);})
