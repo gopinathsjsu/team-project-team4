@@ -8,9 +8,10 @@ const Members = require('./models/membersModel');
 const registrationRoutes = require('./endpointRoutes/registrationEndpoint');
 const regularMembersRoutes = require('./endpointRoutes/regularMembersEndpoint');
 const premiumMembersRoutes = require('./endpointRoutes/premiumMembersEndpoint');
+
 const cors = require('cors');
 const app = express();
-
+app.use(express.json());
 app.use(express.static('public'));
 app.use(express.urlencoded({extended:false}));
 app.use(express.json());
