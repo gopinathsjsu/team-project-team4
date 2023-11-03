@@ -218,55 +218,29 @@ footer {
 }
 
 /*Movie Listing CSS*/
-.mainListing {
-  padding: 20px;
-  font-family: Arial, sans-serif;
-}
-
-h1 {
-  margin-bottom: 20px;
-}
-
-.movies-container {
+.movies-list {
   display: flex;
-  gap: 20px;
-  overflow-x: scroll;
+  flex-wrap: wrap;
+  gap: 16px; /* Provides space between the movie tiles */
+  list-style-type: none; /* Removes the bullet points from the list */
+  padding: 0; /* Removes padding from the list */
 }
 
 .movie-tile {
-  position: relative;
-  width: 200px;
-  flex-shrink: 0; /* Important for horizontal scrolling */
+  flex-basis: calc(33.33% - 16px); /* Assuming you want 3 tiles per row */
+  display: flex; /* To align the image and movie details side by side */
+  gap: 16px; /* Gap between image and movie details */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  padding: 16px;
+  border-radius: 8px;
+  transition: transform 0.2s;
+}
+
+.movie-tile:hover {
+  transform: scale(1.05);
 }
 
 .movie-image {
-  width: 100%;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
-
-.movie-info {
-  position: absolute;
-  bottom: 10px;
-  left: 10px;
-  color: white;
-}
-
-.movie-rating {
-  display: flex;
-  align-items: center;
-  gap: 5px;
-}
-
-.star {
-  color: red; /* Adjust color as needed */
-}
-
-h2 {
-  font-size: 18px;
-  margin: 5px 0;
-}
-
-p {
-  font-size: 14px;
+  max-width: 150px;
+  border-radius: 8px;
 }
