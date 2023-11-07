@@ -1,7 +1,5 @@
 const { MongoClient, ServerApiVersion } = require('mongodb');
-// const uri = "mongodb+srv://<username>:<password>@cluster0.bndg37a.mongodb.net/?retryWrites=true&w=majority" // Replace <username> and <password> with the corresponding authentications for this cluster.
-
-const uri = "mongodb+srv://miranda:2g94gGQk4mFiDzr9qGVY@cluster0.bndg37a.mongodb.net/?retryWrites=true&w=majority"
+const uri = "mongodb+srv://<username>:<password>@cluster0.bndg37a.mongodb.net/?retryWrites=true&w=majority" // Replace <username> and <password> with the corresponding authentications for this cluster.
 
 const client = new MongoClient(uri, {
 	serverApi: {
