@@ -4,10 +4,18 @@ const bodyParser = require('body-parser');
 const Theatres = require('./models/theatresModel');
 const Users = require('./models/usersModel');
 const Members = require('./models/membersModel');
+const Movies = require('./models/moviesModel');
+const Screens = require('./models/screensModel');
+const Showtimes = require('./models/showtimesModel');
+const Tickets = require('./models/ticketsModel');
+const theatresRoutes = require('./endpointRoutes/theatresEndpoint');
 const registrationRoutes = require('./endpointRoutes/registrationEndpoint');
 const regularMembersRoutes = require('./endpointRoutes/regularMembersEndpoint');
 const premiumMembersRoutes = require('./endpointRoutes/premiumMembersEndpoint');
 const moviesRoutes = require('./endpointRoutes/moviesEndpoint');
+const screensRoutes = require('./endpointRoutes/screensEndpoint');
+const showtimesRoutes = require('./endpointRoutes/showtimesEndpoint');
+const ticketsRoutes = require('./endpointRoutes/ticketsEndpoint');
 const cors = require('cors');
 const app = express();
 
@@ -20,9 +28,19 @@ app.use(moviesRoutes);
 app.use(registrationRoutes);
 app.use(regularMembersRoutes);
 app.use(premiumMembersRoutes);
+app.use(theatresRoutes);
+app.use(screensRoutes);
+app.use(showtimesRoutes);
+app.use(ticketsRoutes);
+
 
 Theatres.find().then(theatres => {console.log(theatres);})
 Users.find().then(users => {console.log(users);})
 Members.find().then(members => {console.log(members);})
+Movies.find().then(movies => {console.log(movies);})
+Screens.find().then(screens => {console.log(screens);})
+Showtimes.find().then(st => {console.log(st);})
+Tickets.find().then(tkt => {console.log(tkt);})
+
 
 module.exports = app;
