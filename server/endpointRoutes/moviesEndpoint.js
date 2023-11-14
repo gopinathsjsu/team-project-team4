@@ -67,9 +67,9 @@ router.put('/movies/:id', async (request, response) => {
         const { id } = request.params;
         const movie = await Movies.findByIdAndUpdate(id, request.body);
         if (!movie) {
-            return response.status(404).json({ message : 'Book not found.'});
+            return response.status(404).json({ message : 'Movie not found.'});
         }
-        return response.status(200).json({ message : 'Book updated successfully.'});
+        return response.status(200).json({ message : 'Movie updated successfully.'});
 
     } catch (error) {
         console.log(error.message);
@@ -82,9 +82,9 @@ router.delete('/movies/:id', async (request, response) => {
         const { id }  = request.params;
         const movie = await Movies.findByIdAndDelete(id);
         if(!movie){
-            return response.status(404).json({ message : 'Book not found'});
+            return response.status(404).json({ message : 'Movie not found'});
         }
-        return response.status(200).json({ message : 'Book deleted successfully'});
+        return response.status(200).json({ message : 'Movie deleted successfully'});
     } catch (error) {
         console.log(error.message);
         response.status(500).send({message : error.message});
