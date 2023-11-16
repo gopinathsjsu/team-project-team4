@@ -1,14 +1,21 @@
 const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
-const Movies = require('./models/moviesModel');
 const Theatres = require('./models/theatresModel');
 const Users = require('./models/usersModel');
 const Members = require('./models/membersModel');
+const Movies = require('./models/moviesModel');
+const Screens = require('./models/screensModel');
+const Showtimes = require('./models/showtimesModel');
+const Tickets = require('./models/ticketsModel');
+const theatresRoutes = require('./endpointRoutes/theatresEndpoint');
 const registrationRoutes = require('./endpointRoutes/registrationEndpoint');
 const regularMembersRoutes = require('./endpointRoutes/regularMembersEndpoint');
 const premiumMembersRoutes = require('./endpointRoutes/premiumMembersEndpoint');
-
+const moviesRoutes = require('./endpointRoutes/moviesEndpoint');
+const screensRoutes = require('./endpointRoutes/screensEndpoint');
+const showtimesRoutes = require('./endpointRoutes/showtimesEndpoint');
+const ticketsRoutes = require('./endpointRoutes/ticketsEndpoint');
 const cors = require('cors');
 const app = express();
 app.use(express.json());
@@ -17,65 +24,23 @@ app.use(express.urlencoded({extended:false}));
 app.use(express.json());
 app.use(cors());
 
-app.get('/movies', async (request, response) => {
-    try {
-        const movies = await Movies.find({});
-        return response.status(200).json(movies);
-    } catch (error) {
-        console.log(error.message);
-        response.status(500).send({message : error.message});
-    }
-});
-
-app.get('/movies/:id', async (request, response) => {
-    try {
-        const { id }  = request.params;
-        const movie = await Movies.findById(id);
-        return response.status(200).json(movie);
-    } catch (error) {
-        console.log(error.message);
-        response.status(500).send({message : error.message});
-    }
-});
-
-app.post('/movies', async (request, response) => {
-    try {
-        console.log(request.body);
-        if (
-            !request.body.movieName || !request.body.status || !request.body.description || !request.body.language || !request.body.length
-        ) {
-            return response.status(400).send({
-                message : 'Send all required fields'
-            });
-        }
-        const newMovie = {
-            movie_id : request.body.movie_id,
-            movieName : request.body.movieName,
-            status : request.body.status,
-            description : request.body.description,
-            language : request.body.language,
-            length : request.body.length,
-            date : request.body.date,
-            img : request.body.img,
-            rating : request.body.rating
-        }
-
-        const movie = await Movies.create(newMovie);
-        return response.status(200).json(movie);
-
-    } catch (error) {
-        console.log(error.message);
-        response.status(500).send({message : error.message});
-    }
-});
-
+app.use(moviesRoutes);
 app.use(registrationRoutes);
 app.use(regularMembersRoutes);
 app.use(premiumMembersRoutes);
+app.use(theatresRoutes);
+app.use(screensRoutes);
+app.use(showtimesRoutes);
+app.use(ticketsRoutes);
 
-Movies.find().then(movies => {console.log(movies);})
+
 Theatres.find().then(theatres => {console.log(theatres);})
 Users.find().then(users => {console.log(users);})
 Members.find().then(members => {console.log(members);})
+Movies.find().then(movies => {console.log(movies);})
+Screens.find().then(screens => {console.log(screens);})
+Showtimes.find().then(st => {console.log(st);})
+Tickets.find().then(tkt => {console.log(tkt);})
+
 
 module.exports = app;
