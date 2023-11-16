@@ -4,6 +4,12 @@ const Movies = require('../models/moviesModel');
 
 router.get('/movies', async (request, response) => {
     try {
+        const { status } = request.query;
+        if(status)
+        {
+            const movies = await Movies.find({ status : status});
+            return response.status(200).json(movies);
+        }
         const movies = await Movies.find({});
         return response.status(200).json(movies);
     } catch (error) {

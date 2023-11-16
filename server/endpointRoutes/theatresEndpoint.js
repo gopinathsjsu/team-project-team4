@@ -2,6 +2,27 @@ const express = require('express');
 const router = express.Router();
 const Theatres = require('../models/theatresModel');
 
+router.get('/locations', async (request, response) => {
+    try {
+        const locations = await Theatres.find({}, 'city');
+        return response.status(200).json(locations);
+    } catch (error) {
+        console.log(error.message);
+        response.status(500).send({message : error.message});
+    }
+});
+
+router.get('/locations/:place', async (request, response) => {
+    try {
+        const { place } = request.params;
+        const theatres = await Theatres.find({ city : place});
+        return response.status(200).json(theatres);
+    } catch (error) {
+        console.log(error.message);
+        response.status(500).send({message : error.message});
+    }
+});
+
 router.get('/theatres', async (request, response) => {
     try {
         const theatres = await Theatres.find({});
@@ -25,7 +46,6 @@ router.get('/theatres/:id', async (request, response) => {
 
 router.post('/theatres', async (request, response) => {
     try {
-        console.log(request.body);
         if (
             !request.body.theatreName || !request.body.city 
         ) {
