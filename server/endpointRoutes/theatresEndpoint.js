@@ -4,7 +4,7 @@ const Theatres = require('../models/theatresModel');
 
 router.get('/locations', async (request, response) => {
     try {
-        const locations = await Theatres.find({}, 'city');
+        const locations = await Theatres.distinct('city');
         return response.status(200).json(locations);
     } catch (error) {
         console.log(error.message);
