@@ -39,10 +39,10 @@ function Signup() {
 
     try {
       const res = await registerApi(body);
-      setMsg({ m: res.message, t: "success" });
+      console.log(res)
+      setMsg({ m: res.data.message, t: "success" });
       setOpen(true);
     } catch (e) {
-      console.log(e);
       setMsg({ m: e.response.data.error, t: "error" });
       setOpen(true);
     }
