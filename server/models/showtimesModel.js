@@ -8,7 +8,7 @@ const showtimesSchema = new mongoose.Schema(
             type : Schema.Types.ObjectId,
             required : true
         },
-
+        
         showDate : {
             type : Date,
             required : true
