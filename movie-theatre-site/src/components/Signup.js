@@ -6,6 +6,7 @@ import Snackbar from "@mui/material/Snackbar";
 import Header from "./Header";
 
 import MuiAlert, { AlertProps } from "@mui/material/Alert";
+import { useNavigate } from "react-router-dom";
 
 const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
@@ -15,6 +16,8 @@ function Signup() {
   const [memberType, setMemberType] = useState("regular");
   const [open, setOpen] = useState(false);
   const [msg, setMsg] = useState({ m: "", t: "" });
+
+  const navigate = useNavigate();
   console.log(memberType);
 
   const registerApi = (body) => {
@@ -39,9 +42,10 @@ function Signup() {
 
     try {
       const res = await registerApi(body);
-      console.log(res)
+      console.log(res);
       setMsg({ m: res.data.message, t: "success" });
       setOpen(true);
+      setTimeout(() => navigate("/login"), 4000);
     } catch (e) {
       setMsg({ m: e.response.data.error, t: "error" });
       setOpen(true);
@@ -112,7 +116,7 @@ function Signup() {
       </div>
       <Snackbar
         open={open}
-        autoHideDuration={6000}
+        autoHideDuration={3000}
         message={msg}
         // action={action}
       >
@@ -121,7 +125,8 @@ function Signup() {
           severity={msg.t}
           sx={{ width: "100%" }}
         >
-          {msg.m}
+          {msg.m}&nbsp;
+          {msg.t === "success" ? "Redirecting to login..." : null}
         </Alert>
       </Snackbar>
     </>
