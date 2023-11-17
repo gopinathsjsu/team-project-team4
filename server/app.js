@@ -35,6 +35,4 @@ app.use(screensRoutes);
 app.use(showtimesRoutes);
 app.use(ticketsRoutes);
 
-
-
 module.exports = app;
