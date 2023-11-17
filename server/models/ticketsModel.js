@@ -1,14 +1,14 @@
 const mongoose = require('mongoose');
-const Users = require('./usersModel');
+const Members = require('./membersModel');
 const Showtimes = require('./showtimesModel');
 
 const { Schema } = mongoose;
 
 const ticketsSchema = new mongoose.Schema(
     {
-        userid : {
+        memberid : {
             type : Schema.Types.ObjectId,
-            ref : Users,
+            ref : Members,
             required : true
         },
 

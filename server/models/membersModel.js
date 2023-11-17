@@ -38,6 +38,11 @@ const membersSchema = new mongoose.Schema(
         role : {
             type : String,
             required : true
+        },
+
+        rewards : {
+            type : Number,
+            required : false
         }
     }
 )
