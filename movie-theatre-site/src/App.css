@@ -244,3 +244,24 @@ footer {
   max-width: 150px;
   border-radius: 8px;
 }
+/*Seating*/
+.seating-chart .row {
+  display: flex;
+  align-items: center;
+}
+
+.seating-chart .row .label {
+  margin-right: 10px;
+}
+
+.seat {
+  margin: 5px;
+  padding: 10px;
+  background-color: #ddd;
+  border: none;
+  cursor: pointer;
+}
+
+.seat.selected {
+  background-color: #0f0;
+}

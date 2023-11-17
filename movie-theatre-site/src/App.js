@@ -10,6 +10,7 @@ import BookTickets from './components/BookTickets';
 import Showtimes from './components/Showtimes';
 import About from './components/About';
 import Contact from './components/Contact';
+import Seating from './components/Seating';
 function App() {
   return (
       <Routes>
@@ -22,6 +23,7 @@ function App() {
         <Route path='/booktickets' element={<BookTickets/>}/>
         <Route path='/about' element={<About/>}/>
         <Route path='/contactus' element={<Contact/>}/>
+        <Route path='/seating' element={<Seating/>}/>
       </Routes>
     
     
