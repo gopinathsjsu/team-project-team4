@@ -1,6 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const Tickets = require('../models/ticketsModel');
+const Showtimes = require('../models/showtimesModel');
+const Members = require('../models/membersModel');
 
 router.get('/tickets', async (request, response) => {
     try {
@@ -25,20 +27,28 @@ router.get('/tickets/:id', async (request, response) => {
 
 router.post('/tickets', async (request, response) => {
     try {
-        console.log(request.body);
         if (
-            !request.body.userid || !request.body.seatsBooked || !request.body.showid  
+            !request.body.memberid || !request.body.seatsBooked || !request.body.showid  
         ) {
             return response.status(400).send({
                 message : 'Send all required fields'
             });
         }
         const newTicket = {
-            userid : request.body.userid,
+            memberid : request.body.memberid,
             seatsBooked : request.body.seatsBooked,
             showid : request.body.showid
         }
-
+        const show = await Showtimes.findById(request.body.showid);
+        let n = request.body.seatsBooked.length;
+        for(let i = 0;i<n;i++)
+        {
+            show.seats_booked.push(request.body.seatsBooked[i]);
+        }
+        const member = await Members.findById(request.body.memberid);
+        member.rewards=n*show.price;
+        await Showtimes.findByIdAndUpdate(request.body.showid, show);
+        await Members.findByIdAndUpdate(request.body.memberid, member);
         const ticket = await Tickets.create(newTicket);
         return response.status(200).json(ticket);
 
@@ -51,7 +61,6 @@ router.post('/tickets', async (request, response) => {
 
 router.put('/tickets/:id', async (request, response) => {
     try {
-        console.log(request.body);
         if (
             !request.body.userid || !request.body.seatsBooked || !request.body.showid  
         ) {
@@ -75,7 +84,22 @@ router.put('/tickets/:id', async (request, response) => {
 router.delete('/tickets/:id', async (request, response) => {
     try {
         const { id }  = request.params;
-        const ticket = await Tickets.findByIdAndDelete(id);
+        let ticket = await Tickets.findById(id);
+        const show = await Showtimes.findById(ticket.showid);
+        let ticketSeatsBooked = ticket.seatsBooked;
+        let arr = show.seats_booked;
+        for(let i = 0;i<ticketSeatsBooked.length;i++)
+        {
+            let index = arr.indexOf(ticketSeatsBooked[i]); 
+            if (index > -1) {
+            arr.splice(index, 1);
+            }
+        }
+        const member = await Members.findById(ticket.memberid);
+        member.rewards-=ticketSeatsBooked.length*show.price;
+        await Showtimes.findByIdAndUpdate(ticket.showid, show);
+        await Members.findByIdAndUpdate(ticket.memberid, member);
+        ticket = await Tickets.findByIdAndDelete(id);
         if(!ticket){
             return response.status(404).json({ message : 'Ticket not found'});
         }
