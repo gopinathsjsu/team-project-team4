@@ -33,14 +33,4 @@ app.use(screensRoutes);
 app.use(showtimesRoutes);
 app.use(ticketsRoutes);
 
-
-Theatres.find().then(theatres => {console.log(theatres);})
-Users.find().then(users => {console.log(users);})
-Members.find().then(members => {console.log(members);})
-Movies.find().then(movies => {console.log(movies);})
-Screens.find().then(screens => {console.log(screens);})
-Showtimes.find().then(st => {console.log(st);})
-Tickets.find().then(tkt => {console.log(tkt);})
-
-
 module.exports = app;
