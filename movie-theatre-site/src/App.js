@@ -11,6 +11,7 @@ import Showtimes from './components/Showtimes';
 import About from './components/About';
 import Contact from './components/Contact';
 import Seating from './components/Seating';
+import MovieDetail from './components/MovieDetail';
 function App() {
   return (
       <Routes>
@@ -24,6 +25,7 @@ function App() {
         <Route path='/about' element={<About/>}/>
         <Route path='/contactus' element={<Contact/>}/>
         <Route path='/seating' element={<Seating/>}/>
+        <Route path='/movie/:movieId' Component={MovieDetail}/>
       </Routes>
     
     

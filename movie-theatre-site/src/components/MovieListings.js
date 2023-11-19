@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Link } from 'react-router-dom'; 
 import Header from "./Header";
 
 const MovieListings = () => {
@@ -38,12 +39,14 @@ const MovieListings = () => {
             <ul className="movies-list">
                 {filteredMovies.map((movie) => (
                     <li key={movie._id} className="movie-tile">
-                        <img src={`${movie.img}`} alt={movie.movieName} className="movie-image"/>
-                        <div>
-                            <h2>{movie.movieName}</h2>
-                            <p>Status: {movie.status}</p>
-                            <p>Description: {movie.description}</p>
-                        </div>
+                        {/* Wrap movie details in a Link component */}
+                        <Link to={`/movie/${movie._id}`}> 
+                            <img src={movie.img} alt={movie.movieName} className="movie-image"/></Link>
+                            <div>
+                                <h2>{movie.movieName}</h2>
+                                <p>Status: {movie.status}</p>
+                                <p>Description: {movie.description}</p>
+                            </div>
                     </li>
                 ))}
             </ul>
@@ -52,4 +55,5 @@ const MovieListings = () => {
 };
 
 export default MovieListings;
+
 

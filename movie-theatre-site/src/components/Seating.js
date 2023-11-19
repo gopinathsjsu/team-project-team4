@@ -1,4 +1,5 @@
 import React, { useState     } from 'react';
+import Header from "./Header";
 // Define a Seat component
 
 const Seat = ({ row, number, price, onToggle, isSelected }) => (
@@ -43,7 +44,7 @@ const Seating = () => {
     return seats;
   };
   return (
-    <div className="seating-chart">
+    <><Header /><div className="seating-chart">
       <div className="row vip">
         <div className="label">VIP - Rs. 350.00</div>
         {generateSeats('O', 14, 350)}
@@ -54,7 +55,7 @@ const Seating = () => {
         {/* Repeat for other rows */}
       </div>
       {/* ... */}
-    </div>
+    </div></>
   );
 };
 

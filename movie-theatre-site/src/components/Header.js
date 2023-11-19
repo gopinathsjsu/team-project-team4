@@ -15,7 +15,6 @@ const Header = () => {
           <a href="/movielistings" className="link">Movies</a>
           <a href="/about" className="link">About</a>
           <a href="/contactus" className="link">Contact</a>
-          <a href="/seating" className="link">Seating</a>
           </ul>
           
         </nav>
