@@ -10,34 +10,25 @@ const MovieDetail = () => {
   useEffect(() => {
     const fetchMovieDetails = async () => {
       try {
-        // Fetch movie details
         const movieResponse = await fetch(`/movies/${movieId}`);
         const movieData = await movieResponse.json();
         setMovie(movieData);
 
-        // Fetch showtimes for the movie
-        const showtimesResponse = await fetch(`/showtimes?movieid=${movieId}`);
-        const showtimesData = await showtimesResponse.json();
-
-        // Organize showtimes by theatre
         let theatreShowtimesMap = {};
-        for (const showtime of showtimesData) {
-          const screenResponse = await fetch(`/screens/${showtime.screen_id}`);
-          const screenData = await screenResponse.json();
-          const theatreId = screenData.theatre_id;
-
-          if (!theatreShowtimesMap[theatreId]) {
-            const theatreResponse = await fetch(`/theatres/${theatreId}`);
-            const theatreData = await theatreResponse.json();
-            theatreShowtimesMap[theatreId] = {
-              theatreName: theatreData.theatreName,
-              city: theatreData.city,
-              showtimes: [],
-            };
+        const theatres = await fetch(`/movies?movieid=${movieId}`);
+        const theatresData = await theatres.json();
+        for(let i=0;i<theatresData.length;i++)
+        {
+          const showsData = await fetch(`/movies?movieid=${movieId}&theatreid=${theatresData[i]._id}`);
+          const shows = await showsData.json();
+          console.log(shows);
+          theatreShowtimesMap[theatresData[i]._id] = {
+            theatreName: theatresData[i].theatreName,
+              city: theatresData[i].city,
+              showtimes: shows,
           }
-          theatreShowtimesMap[theatreId].showtimes.push(showtime);
+          
         }
-
         setTheatreShowtimes(theatreShowtimesMap);
       } catch (error) {
         console.error("Error:", error);
