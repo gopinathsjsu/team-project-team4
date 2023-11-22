@@ -16,6 +16,7 @@ const moviesRoutes = require('./endpointRoutes/moviesEndpoint');
 const screensRoutes = require('./endpointRoutes/screensEndpoint');
 const showtimesRoutes = require('./endpointRoutes/showtimesEndpoint');
 const ticketsRoutes = require('./endpointRoutes/ticketsEndpoint');
+const signInRoutes = require('./endpointRoutes/SignInEndpoint');
 
 
 const cors = require('cors');
@@ -34,5 +35,6 @@ app.use(theatresRoutes);
 app.use(screensRoutes);
 app.use(showtimesRoutes);
 app.use(ticketsRoutes);
+app.use(signInRoutes);
 
 module.exports = app;
