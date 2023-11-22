@@ -1,5 +1,6 @@
 /* App.css */
 
+
 /* Global styles for the app */
 body {
   font-family: Arial, sans-serif;
@@ -7,13 +8,17 @@ body {
   padding: 0;
   background-color: #f0f0f0;
 }
-
+/*Header*/
 header {
   background-color: #333;
   color: white;
   padding: 1rem;
 }
-
+.mainHeaderDiv {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
 nav ul {
   list-style: none;
   padding: 0;
@@ -23,7 +28,7 @@ nav ul {
 nav li {
   margin-right: 20px;
 }
-
+    /*Hero Start*/
 .hero {
   background-image: url('your-hero-background-image.jpg');
   background-size: cover;
@@ -51,7 +56,9 @@ nav li {
   font-size: 1rem;
   cursor: pointer;
 }
+/*Hero End*/
 
+/*Features Start*/
 .features {
   display: flex;
   justify-content: space-between;
@@ -71,19 +78,16 @@ nav li {
   font-size: 1.5rem;
   margin-bottom: 1rem;
 }
-
+/*Features End*/
+/*Footer Start*/
 footer {
   background-color: #333;
   color: white;
   text-align: center;
   padding: 1rem 0;
 }
+/*Footer End*/
 
-.mainHeaderDiv {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
 
 /* Styling for login and signup */
 
@@ -208,7 +212,35 @@ footer {
   color: red
 }
 
-/* Changing the color */
+/* Changing the color while Hover */
 .link:hover { 
   color: red; 
+}
+
+/*Movie Listing CSS*/
+.movies-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px; /* Provides space between the movie tiles */
+  list-style-type: none; /* Removes the bullet points from the list */
+  padding: 0; /* Removes padding from the list */
+}
+
+.movie-tile {
+  flex-basis: calc(33.33% - 16px); /* Assuming you want 3 tiles per row */
+  display: flex; /* To align the image and movie details side by side */
+  gap: 16px; /* Gap between image and movie details */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  padding: 16px;
+  border-radius: 8px;
+  transition: transform 0.2s;
+}
+
+.movie-tile:hover {
+  transform: scale(1.05);
+}
+
+.movie-image {
+  max-width: 150px;
+  border-radius: 8px;
 }

@@ -2,10 +2,6 @@ const mongoose = require('mongoose');
 
 const membersSchema = new mongoose.Schema(
     {
-        member_id : {
-            type : Number,
-            required : true
-        },
 
         firstName : {
             type : String,
@@ -42,6 +38,11 @@ const membersSchema = new mongoose.Schema(
         role : {
             type : String,
             required : true
+        },
+
+        rewards : {
+            type : Number,
+            required : false
         }
     }
 )

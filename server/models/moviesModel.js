@@ -2,11 +2,6 @@ const mongoose = require('mongoose');
 
 const moviesSchema = new mongoose.Schema(
     {
-        movie_id : {
-            type : Number,
-            required : true
-        },
-
         movieName : {
             type : String,
             required : true
@@ -44,7 +39,6 @@ const moviesSchema = new mongoose.Schema(
         
         img : {
             type : String,
-            required : true
         }
     }
 )

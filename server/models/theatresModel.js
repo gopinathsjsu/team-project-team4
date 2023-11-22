@@ -2,11 +2,6 @@ const mongoose = require('mongoose');
 
 const theatresSchema = new mongoose.Schema(
     {
-        theatre_id : {
-            type : Number,
-            required : true
-        },
-
         theatreName : {
             type : String,
             required : true
@@ -14,11 +9,6 @@ const theatresSchema = new mongoose.Schema(
 
         city : {
             type : String,
-            required : true
-        },
-
-        screensid : {
-            type : Array,
             required : true
         }
     }
