@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const Showtimes = require('../models/showtimesModel');
+const mw = require('../services/middleware');
 
 router.get('/showtimes', async (request, response) => {
     try {
@@ -23,7 +24,7 @@ router.get('/showtimes/:id', async (request, response) => {
     }
 });
 
-router.post('/showtimes', async (request, response) => {
+router.post('/showtimes', mw.memberAuth, mw.checkRole(['admin']), async (request, response) => {
     try {
         console.log(request.body);
         if (
@@ -52,7 +53,7 @@ router.post('/showtimes', async (request, response) => {
 });
 
 
-router.put('/showtimes/:id', async (request, response) => {
+router.put('/showtimes/:id', mw.memberAuth, mw.checkRole(['admin']), async (request, response) => {
     try {
         console.log(request.body);
         if (
@@ -75,7 +76,7 @@ router.put('/showtimes/:id', async (request, response) => {
     }
 });
 
-router.delete('/showtimes/:id', async (request, response) => {
+router.delete('/showtimes/:id', mw.memberAuth, mw.checkRole(['admin']),  async (request, response) => {
     try {
         const { id }  = request.params;
         const showtime = await Showtimes.findByIdAndDelete(id);

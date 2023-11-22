@@ -1,6 +1,9 @@
 const express = require('express');
 const router = express.Router();
 const Theatres = require('../models/theatresModel');
+const mw = require('../services/middleware');
+
+
 
 router.get('/locations', async (request, response) => {
     try {
@@ -44,7 +47,7 @@ router.get('/theatres/:id', async (request, response) => {
     }
 });
 
-router.post('/theatres', async (request, response) => {
+router.post('/theatres', mw.memberAuth, mw.checkRole(['admin']), async (request, response) => {
     try {
         if (
             !request.body.theatreName || !request.body.city 
@@ -68,7 +71,7 @@ router.post('/theatres', async (request, response) => {
 });
 
 
-router.put('/theatres/:id', async (request, response) => {
+router.put('/theatres/:id',  mw.memberAuth, mw.checkRole(['admin']), async (request, response) => {
     try {
         console.log(request.body);
         if (
@@ -91,7 +94,7 @@ router.put('/theatres/:id', async (request, response) => {
     }
 });
 
-router.delete('/theatres/:id', async (request, response) => {
+router.delete('/theatres/:id',  mw.memberAuth, mw.checkRole(['admin']), async (request, response) => {
     try {
         const { id }  = request.params;
         const theatre = await Theatres.findByIdAndDelete(id);
