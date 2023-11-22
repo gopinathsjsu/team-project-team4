@@ -2,14 +2,61 @@ const express = require('express');
 const router = express.Router();
 const Movies = require('../models/moviesModel');
 const mw = require('../services/middleware');
+const Showtimes = require('../models/showtimesModel');
+const Theatres = require('../models/theatresModel');
+const Screens = require('../models/screensModel');
+
 
 router.get('/movies', async (request, response) => {
     try {
-        const { status } = request.query;
-        if(status)
+        const { movieid, theatreid } = request.query;
+        if(theatreid && movieid)
         {
-            const movies = await Movies.find({ status : status});
-            return response.status(200).json(movies);
+            const showtimes = await Showtimes.find({ movieid : movieid});
+            let shows = []
+            let set = new Set();
+            let j = 0;
+            for(let i=0;i<showtimes.length;i++)
+            {
+                let screen = await Screens.findById(showtimes[i].screen_id);
+                if(screen.theatre_id==theatreid && !set.has(showtimes))
+                {
+                    set.add(showtimes[i]);
+                    shows[j] = showtimes[i];
+                    j++;
+                }
+            }
+            return response.status(200).json(shows);;
+        }
+        if(movieid)
+        {
+            const showtimes = await Showtimes.find({ movieid : movieid});
+            let screenid = new Set();
+            for(let i=0;i<showtimes.length;i++)
+            {
+                screenid.add(showtimes[i].screen_id);
+            }
+            screenid = [...screenid];
+            let theatid = new Set();
+            for(let i=0;i<screenid.length;i++)
+            {
+                const screen = await Screens.findById(screenid[i]);
+                theatid.add(screen.theatre_id);
+            }
+            theatid = [...theatid];
+            let theatres = [];
+            let set = new Set();
+            let j = 0;
+            for(let i=0;i<theatid.length;i++)
+            {
+                let s = theatid[i].toString();
+                if(set.has(s)) continue;
+                set.add(s);
+                const theatre = await Theatres.findById(theatid[i]);
+                theatres[j] = theatre;
+                j++;
+            }
+            return response.status(200).json(theatres);
         }
         const movies = await Movies.find({});
         return response.status(200).json(movies);
