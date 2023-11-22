@@ -12,6 +12,7 @@ import About from './components/About';
 import Contact from './components/Contact';
 import Seating from './components/Seating';
 import MovieDetail from './components/MovieDetail';
+import { TheatreLocations } from './components/TheatreLocations';
 function App() {
   return (
       <Routes>
@@ -20,14 +21,14 @@ function App() {
         <Route path='/login' element={<Login/>}/>
         <Route path='/signup' element={<SignUp/>}/>
         <Route path='/movielistings' element={<MovieListings/>}/>
+        <Route path='/theatrelocations' element={<TheatreLocations/>}/>
         <Route path='/showtimes' element={<Showtimes/>}/>
         <Route path='/booktickets' element={<BookTickets/>}/>
         <Route path='/about' element={<About/>}/>
         <Route path='/contactus' element={<Contact/>}/>
         <Route path='/seating' element={<Seating/>}/>
-        <Route path='/movie/:movieId' Component={MovieDetail}/>
+        <Route path='/moviedetails' element={<MovieDetail/>}/>
       </Routes>
-    
     
   );
 }

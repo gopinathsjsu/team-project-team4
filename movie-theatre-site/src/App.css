@@ -266,43 +266,7 @@ footer {
   background-color: #0f0;
 }
 
-/*MovieDetail.js*/
-.movie-tile1 {
-    display: flex; /* Enables flexbox */
-    align-items: center; /* Aligns items vertically in the center */
-    justify-content: flex-start; /* Aligns items to the start of the container */
-    background: white; /* Example background color */
-    border-radius: 8px; /* Rounds the corners */
-    overflow: hidden; /* Ensures the content fits within the borders */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Adds a subtle shadow */
-    margin-bottom: 20px; /* Adds space between the tiles */
-}
-
-.movie-image {
-    width: 200px; /* Set a fixed width for the image */
-    height: auto; /* Adjust height automatically */
-    object-fit: cover; /* Ensures the image covers the area */
-}
-
-.movie-info {
-    display: flex; /* Enables flexbox for the info container */
-    flex-direction: column; /* Stacks the info items vertically */
-    padding: 10px; /* Adds padding inside the info container */
-    flex: 1; /* Allows the container to fill the remaining space */
-}
-
-/* Additional CSS for movie title, status, and description */
-.movie-info h2 {
-    margin: 0;
-    padding: 0;
-    font-size: 1.2em; /* Adjust the font size as needed */
-}
-
-.movie-info p {
-    font-size: 1em; /* Adjust the font size as needed */
-    color: #333; /* Example text color */
-    margin: 5px 0; /* Adds vertical space between paragraphs */
-}
+/*MovieDetails.js*/
 
 .theatre-list {
   margin-top: 20px;
