@@ -12,12 +12,12 @@ import BookTickets from './components/BookTickets';
 import Showtimes from './components/Showtimes';
 import About from './components/About';
 import Contact from './components/Contact';
-import Seating from './components/Seating';
 import MovieDetail from './components/MovieDetail';
 import TheatreLocations from './components/TheatreLocations';
 import TheatreShowings from './components/TheatreShowings';
 import UpdateMovie from './components/UpdateMovie';
 import MembershipOptions from './components/MembershipOptions';
+import SeatingChart from './components/SeatingChart';
 
 function App() {
   return (
@@ -33,7 +33,7 @@ function App() {
         <Route path='/booktickets' element={<Layout><BookTickets/></Layout>}/>
         <Route path='/about' element={<Layout><About/></Layout>}/>
         <Route path='/contactus' element={<Layout><Contact/></Layout>}/>
-        <Route path='/seating' element={<Layout><Seating/></Layout>}/>
+        <Route path='/seating/:showtimeId' element={<Layout><SeatingChart/></Layout>}/>
         <Route path='/movie/:movieId' element={<Layout><MovieDetail/></Layout>}/>
         <Route path='/theatrelocations/:theatreId' element={<Layout><TheatreShowings/></Layout>}/>
         <Route path="/update-movie/:id" element={<Layout><UpdateMovie /></Layout>} />
