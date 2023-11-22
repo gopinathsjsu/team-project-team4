@@ -244,3 +244,73 @@ footer {
   max-width: 150px;
   border-radius: 8px;
 }
+/*Seating*/
+.seating-chart .row {
+  display: flex;
+  align-items: center;
+}
+
+.seating-chart .row .label {
+  margin-right: 10px;
+}
+
+.seat {
+  margin: 5px;
+  padding: 10px;
+  background-color: #ddd;
+  border: none;
+  cursor: pointer;
+}
+
+.seat.selected {
+  background-color: #0f0;
+}
+
+/*MovieDetails.js*/
+
+.theatre-list {
+  margin-top: 20px;
+}
+
+.theatre-name {
+  background: none;
+  border: none;
+  text-align: left;
+  width: 100%;
+  padding: 10px;
+  font-size: 18px;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.theatre-name:hover {
+  background-color: #f0f0f0;
+}
+
+.showtimes {
+  padding-left: 20px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  background-color: #f8f8f8;
+  border-left: 2px solid #ddd;
+}
+
+.arrow {
+  font-size: 14px;
+  margin-left: 10px;
+}
+.showtimes1 {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px; /* Adjust the space between showtimes */
+  padding: 10px;
+  background-color: #f8f8f8;
+}
+
+.showtime {
+  background-color: #e0e0e0;
+  padding: 5px 10px;
+  border-radius: 5px;
+}
