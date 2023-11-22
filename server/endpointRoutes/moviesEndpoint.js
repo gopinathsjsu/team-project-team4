@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const Movies = require('../models/moviesModel');
+const mw = require('../services/middleware');
 
 router.get('/movies', async (request, response) => {
     try {
@@ -29,7 +30,7 @@ router.get('/movies/:id', async (request, response) => {
     }
 });
 
-router.post('/movies', async (request, response) => {
+router.post('/movies', mw.memberAuth, mw.checkRole(['admin']), async (request, response) => {
     try {
         console.log(request.body);
         if (
@@ -60,7 +61,7 @@ router.post('/movies', async (request, response) => {
     }
 });
 
-router.put('/movies/:id', async (request, response) => {
+router.put('/movies/:id', mw.memberAuth, mw.checkRole(['admin']), async (request, response) => {
     try {
         console.log(request.body);
         if (
@@ -83,7 +84,7 @@ router.put('/movies/:id', async (request, response) => {
     }
 });
 
-router.delete('/movies/:id', async (request, response) => {
+router.delete('/movies/:id', mw.memberAuth, mw.checkRole(['admin']), async (request, response) => {
     try {
         const { id }  = request.params;
         const movie = await Movies.findByIdAndDelete(id);
