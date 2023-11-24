@@ -1,13 +1,19 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { Card, Image, Stack, CardBody, Heading, Text } from "@chakra-ui/react";
-import { Link } from "@chakra-ui/react";
+import {
+  Box,
+  Accordion,
+  AccordionButton,
+  AccordionItem,
+  AccordionPanel,
+  AccordionIcon,
+} from "@chakra-ui/react";
 import Header from "./Header";
 
 const MovieDetail = () => {
   const [movie, setMovie] = useState({});
   const [theatreShowtimes, setTheatreShowtimes] = useState({});
-  const [expandedTheatreId, setExpandedTheatreId] = useState(null);
   const { movieId } = useParams();
 
   useEffect(() => {
@@ -40,10 +46,6 @@ const MovieDetail = () => {
 
     fetchMovieDetails();
   }, [movieId]);
-
-  const toggleShowtimes = (theatreId) => {
-    setExpandedTheatreId(expandedTheatreId === theatreId ? null : theatreId);
-  };
 
   if (!movie) {
     return <div>Loading...</div>;
@@ -78,28 +80,33 @@ const MovieDetail = () => {
         {Object.keys(theatreShowtimes).length ? (
           Object.entries(theatreShowtimes).map(([theatreId, theatreData]) => (
             <div key={theatreId} className="theatre">
-              <button
-                onClick={() => toggleShowtimes(theatreId)}
-                className="theatre-name"
-              >
-                {theatreData.theatreName} - {theatreData.city}
-                <span className="arrow">
-                  {expandedTheatreId === theatreId ? "▲" : "▼"}
-                </span>
-              </button>
-              {expandedTheatreId === theatreId && (
-                <div className="showtimes1">
-                  {theatreData.showtimes.map((showtime, index) => (
-                    <Link
-                      key={index}
-                      to={`/seating/${showtime._id}`}
-                      className="showtime-link"
-                    >
-                      <span>{showtime.showStartTime}</span>
-                    </Link>
-                  ))}
-                </div>
-              )}
+              <Accordion allowMultiple>
+                {Object.entries(theatreShowtimes).map(
+                  ([theatreId, theatreData]) => (
+                    <AccordionItem key={theatreId}>
+                      <h2>
+                        <AccordionButton>
+                          <Box flex="1" textAlign="left">
+                            {theatreData.theatreName} {theatreData.city}
+                          </Box>
+                          <AccordionIcon />
+                        </AccordionButton>
+                      </h2>
+                      <AccordionPanel pb={4}>
+                        {theatreData.showtimes.map((showtime, index) => (
+                          <Link
+                            key={index}
+                            to={`/seating-chart/${showtime._id}`} // Assuming each showtime has a unique ID
+                            className="showtime-link"
+                          >
+                            {showtime.showStartTime}
+                          </Link>
+                        ))}
+                      </AccordionPanel>
+                    </AccordionItem>
+                  )
+                )}
+              </Accordion>
             </div>
           ))
         ) : (
