@@ -50,7 +50,7 @@ function Signup() {
       setMsg({ m: e.response.data.error, t: "error" });
       setOpen(true);
     }
-  }, []);
+  },[]);
   return (
     <>
       <div>
