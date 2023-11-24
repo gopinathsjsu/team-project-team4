@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const Screens = require('../models/screensModel');
+const mw = require('../services/middleware');
 
 router.get('/screens', async (request, response) => {
     try {
@@ -23,7 +24,7 @@ router.get('/screens/:id', async (request, response) => {
     }
 });
 
-router.post('/screens', async (request, response) => {
+router.post('/screens', mw.memberAuth, mw.checkRole(["admin"]), async (request, response) => {
     try {
         console.log(request.body);
         if (
@@ -50,7 +51,7 @@ router.post('/screens', async (request, response) => {
 });
 
 
-router.put('/screens/:id', async (request, response) => {
+router.put('/screens/:id', mw.memberAuth, mw.checkRole(["admin"]), async (request, response) => {
     try {
         console.log(request.body);
         if (
@@ -73,7 +74,7 @@ router.put('/screens/:id', async (request, response) => {
     }
 });
 
-router.delete('/screens/:id', async (request, response) => {
+router.delete('/screens/:id', mw.memberAuth, mw.checkRole(["admin"]), async (request, response) => {
     try {
         const { id }  = request.params;
         const screen = await Screens.findByIdAndDelete(id);
