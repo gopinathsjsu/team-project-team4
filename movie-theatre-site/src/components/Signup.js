@@ -5,7 +5,7 @@ import axios from "axios";
 import Snackbar from "@mui/material/Snackbar";
 import Header from "./Header";
 
-import MuiAlert from "@mui/material/Alert";
+import MuiAlert, { AlertProps } from "@mui/material/Alert";
 import { useNavigate } from "react-router-dom";
 
 const Alert = React.forwardRef(function Alert(props, ref) {
@@ -50,7 +50,7 @@ function Signup() {
       setMsg({ m: e.response.data.error, t: "error" });
       setOpen(true);
     }
-  },[memberType,navigate]);
+  },[]);
   return (
     <>
       <div>
