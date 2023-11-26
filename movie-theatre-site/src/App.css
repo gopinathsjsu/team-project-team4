@@ -477,3 +477,50 @@ footer {
 .premium-membership-tile:hover {
   transform: scale(1.05);
 }
+/* Seating.js*/
+
+.seating-chart-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 20px;
+  padding: 20px;
+  border: 1px solid #ddd; /* Optional: adds a border around the seating chart */
+}
+
+.seating-chart {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.seat-row {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 10px; /* Adjust as needed for vertical spacing */
+}
+
+.seat {
+  margin: 5px; /* Adjust as needed for spacing between seats */
+  padding: 10px 15px; /* Adjust as needed for seat size */
+  border: 1px solid #ccc;
+  border-radius: 5px; /* Optional: for rounded corners */
+  background-color: #f0f0f0; /* Optional: background color for seats */
+  cursor: pointer;
+}
+
+.seat.booked {
+  background-color: rgb(148, 148, 148);
+  pointer-events: none; /* Disables clicking */
+}
+
+.seat.selected {
+  background-color: #a0e0a0; /* Optional: different color for selected seats */
+}
+
+.selected-seats-summary {
+  text-align: center;
+  margin-top: 20px;
+}
