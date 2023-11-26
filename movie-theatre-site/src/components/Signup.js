@@ -2,10 +2,10 @@ import React, { useCallback, useState } from "react";
 
 import axios from "axios";
 
-//import Snackbar from "@mui/material/Snackbar";
+import Snackbar from "@mui/material/Snackbar";
 import Header from "./Header";
 
-import MuiAlert from "@mui/material/Alert";
+import MuiAlert, { AlertProps } from "@mui/material/Alert";
 import { useNavigate } from "react-router-dom";
 
 const Alert = React.forwardRef(function Alert(props, ref) {
@@ -14,10 +14,11 @@ const Alert = React.forwardRef(function Alert(props, ref) {
 
 function Signup() {
   const [memberType, setMemberType] = useState("regular");
-   const [open, setOpen] = useState(false);
-   const [msg, setMsg] = useState({ m: "", t: "" });
+  const [open, setOpen] = useState(false);
+  const [msg, setMsg] = useState({ m: "", t: "" });
 
   const navigate = useNavigate();
+  console.log(memberType);
 
   const registerApi = (body) => {
     return axios.post("/api/register", body, {
@@ -49,9 +50,9 @@ function Signup() {
       setMsg({ m: e.response.data.error, t: "error" });
       setOpen(true);
     }
-  },[memberType,navigate]);
+  },[]);
   return (
-    <div>
+    <>
       <div>
         <Header />
       </div>
@@ -113,8 +114,22 @@ function Signup() {
           Already have an account? <a href="/login">Login</a>
         </div>
       </div>
-      
-    </div>
+      <Snackbar
+        open={open}
+        autoHideDuration={3000}
+        message={msg}
+        // action={action}
+      >
+        <Alert
+          onClose={() => setOpen(false)}
+          severity={msg.t}
+          sx={{ width: "100%" }}
+        >
+          {msg.m}&nbsp;
+          {msg.t === "success" ? "Redirecting to login..." : null}
+        </Alert>
+      </Snackbar>
+    </>
   );
 }
 

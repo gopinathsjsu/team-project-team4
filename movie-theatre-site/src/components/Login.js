@@ -15,7 +15,9 @@ function Login() {
         try {
             const response = await fetch('/api/signin', {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
+                headers: {
+                    'Content-Type': 'application/json',
+                },
                 body: JSON.stringify({ username, password }),
             });
             const data = await response.json();
@@ -31,7 +33,6 @@ function Login() {
             console.error('There was an error logging in:', error);
         }
     };
-
 
     return (
         <>
