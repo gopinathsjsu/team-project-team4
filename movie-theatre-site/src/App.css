@@ -330,7 +330,6 @@ footer {
   width: 100%;
   padding: 10px;
   font-size: 30px;
-  text-align: center;
 }
 
 .theatre-tile {
@@ -339,7 +338,6 @@ footer {
   width: 100%;
   padding: 10px;
   font-size: 20px;
-  text-align: center;
 }
 
 .theatre-tile:hover {
