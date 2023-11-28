@@ -13,6 +13,7 @@ import Contact from './components/Contact';
 import Seating from './components/Seating';
 import MovieDetail from './components/MovieDetail';
 import TheatreLocations from './components/TheatreLocations';
+import TheatreShowings from './components/TheatreShowings';
 function App() {
   return (
       <Routes>
@@ -28,6 +29,7 @@ function App() {
         <Route path='/contactus' element={<Contact/>}/>
         <Route path='/seating' element={<Seating/>}/>
         <Route path='/movie/:movieId' element={<MovieDetail/>}/>
+        <Route path='/theatrelocations/:theatreId' element={<TheatreShowings/>}/>
       </Routes>
     
   );

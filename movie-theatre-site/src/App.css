@@ -314,3 +314,12 @@ footer {
   padding: 5px 10px;
   border-radius: 5px;
 }
+
+/* TheatreShowings.js */
+.movie-tile-with-showtimes {
+  display: flex;
+  gap: 16px;
+  padding: 16px;
+  border-radius: 8px;
+  transition: transform 0.2s;
+}
