@@ -31,6 +31,7 @@ const TheatreShowings = () => {
           };
         }
         setMovieShowtimes(movies);
+        console.log(movies);
       } catch (error) {
         console.error("Error:", error);
       }
@@ -38,10 +39,6 @@ const TheatreShowings = () => {
 
     fetchTheatreShowings();
   }, [theatreId]);
-
-  const toggleShowtimes = (movieId) => {
-    setExpandedMovieId(expandedMovieId === movieId ? null : movieId);
-  };
 
   return (
     <div>
@@ -54,46 +51,40 @@ const TheatreShowings = () => {
       </div>
       {/* Movies and Showtimes information */}
       <div>
-      {Object.keys(movieShowtimes).length ? (
+        {Object.keys(movieShowtimes).length ? (
           Object.entries(movieShowtimes).map(([movieId, movieData]) => (
             <div key={movieId} className="movie">
-                <div className="movie-tile-with-showtimes">
-                    <img
-                        src={movieData.movie.img}
-                        alt={movieData.movie.title}
-                        className="movie-image"
-                    />
-                    <div>
-                        <h2>{movieData.movie.movieName}</h2>
-                        <p>Status: {movieData.movie.status}</p>
-                        <p>Description:</p>
-                        <p>
-                        {movieData.movie.description.length > 250
-                            ? `${movieData.movie.description.substring(0, 200)}...`
-                            : movieData.movie.description}
-                        </p>
-                    </div>
+              <div className="movie-tile-with-showtimes">
+                <img
+                  src={movieData.movie.img}
+                  alt={movieData.movie.title}
+                  className="movie-image"
+                />
+                <div>
+                  <h2>{movieData.movie.movieName}</h2>
+                  <p>Status: {movieData.movie.status}</p>
+                  <p>Description:</p>
+                  <p>
+                    {movieData.movie.description.length > 250
+                      ? `${movieData.movie.description.substring(0, 200)}...`
+                      : movieData.movie.description}
+                  </p>
                 </div>
-                <div className="showtimes1">
-                    {movieData.showtimes.map((showtime, index) => (
-                        <span key={index} className="showtime">
-                            {showtime.showStartTime}
-                        </span>
-                    ))}
-                    
-                </div>
-              
-              
+              </div>
+
+              <div className="showtimes1">
+                {movieData.showtimes.map((showtime, index) => (
+                  <span key={index} className="showtime">
+                    {showtime.showStartTime}
+                  </span>
+                ))}
+              </div>
             </div>
           ))
         ) : (
-          <p>No theaters available for this movie.</p>
+          <p>No movies playing at this theatre.</p>
         )}
       </div>
-
-
-
-      
     </div>
   );
 };
