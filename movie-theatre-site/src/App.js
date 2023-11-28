@@ -18,6 +18,7 @@ import TheatreShowings from './components/TheatreShowings';
 import UpdateMovie from './components/UpdateMovie';
 import MembershipOptions from './components/MembershipOptions';
 import SeatingChart from './components/SeatingChart';
+import Payment from './components/Payment';
 
 function App() {
   return (

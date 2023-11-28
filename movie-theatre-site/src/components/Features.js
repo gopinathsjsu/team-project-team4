@@ -5,7 +5,7 @@ const Features = () => {
   return (
     <section className="features">
       <div className="feature">
-        <a href='/booktickets' className='link-'><h2>Theatre Locations</h2></a>
+        <a href='/theatrelocations' className='link-'><h2>Theatre Locations</h2></a>
         <p>Watch at a  wide range of locations </p>
       </div>
       <div className="feature">

@@ -1,61 +1,124 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import React, { useState, useEffect} from "react";
+import axios from "axios";
+import { useParams, useNavigate } from "react-router-dom";
+import Header from "./Header";
 
-const SeatingChart = ({ showtimeId }) => {
+const SeatingChart = () => {
   const [seatingLayout, setSeatingLayout] = useState(null);
   const [selectedSeats, setSelectedSeats] = useState(new Set());
+  const [ticketPrice, setTicketPrice] = useState(0);
+  const [movieTitle, setMovieTitle] = useState("");
+  const { showtimeId } = useParams();
+  const navigate = useNavigate(); 
 
   useEffect(() => {
-    // Replace with your actual API endpoint
-    axios.get(`/showtimes/${showtimeId}`)
-      .then(response => {
-        setSeatingLayout(response.data);
-      })
-      .catch(error => console.error('Error fetching seating data:', error));
+    const fetchShowtimeDetails = async () => {
+      try {
+        // Fetch showtime details including movieId
+        const showtimeResponse = await axios.get(`/showtimes/${showtimeId}`);
+        const { rows, cols, seats_booked, movieId, price } =
+          showtimeResponse.data;
+        setSeatingLayout({ rows, cols, seats_booked });
+        setTicketPrice(price); // Set ticket price from API response
+
+        // Fetch movie details
+        if (movieId) {
+          const movieResponse = await axios.get(`/movies/${movieId}`);
+          setMovieTitle(movieResponse.data.movieName);
+        }
+      } catch (error) {
+        console.error("Error fetching showtime and movie data:", error);
+      }
+    };
+
+    fetchShowtimeDetails();
   }, [showtimeId]);
 
   const handleSeatClick = (seatId) => {
-    if (selectedSeats.has(seatId)) {
-      selectedSeats.delete(seatId);
+    const updatedSelectedSeats = new Set(selectedSeats);
+    if (updatedSelectedSeats.has(seatId)) {
+      updatedSelectedSeats.delete(seatId);
     } else {
-      selectedSeats.add(seatId);
+      updatedSelectedSeats.add(seatId);
     }
-    setSelectedSeats(new Set([...selectedSeats]));
+    setSelectedSeats(updatedSelectedSeats);
   };
-
-  if (!seatingLayout) {
-    return <div>Loading seating chart...</div>;
-  }
-
+  const handleProceedToPayment = () => {
+    // Calculate the total cost based on the number of selected seats and ticket price
+    const selectedSeatsArray = Array.from(selectedSeats);
+    const totalCost = selectedSeatsArray.length * ticketPrice;
+  
+    // Prepare the data to be passed to the payment page
+    const paymentData = {
+      totalCost,
+      numberOfSeats: selectedSeatsArray.length,
+      selectedSeats: selectedSeatsArray,
+      movieTitle
+    };
+    navigate("/payment", { state: paymentData });
+  };
   const renderSeats = () => {
+    if (!seatingLayout) return null;
     let seats = [];
     for (let row = 0; row < seatingLayout.rows; row++) {
-      const rowSeats = [];
-      for (let col = 0; col < seatingLayout.columns; col++) {
-        const seatId = String.fromCharCode(65 + row) + (col + 1); // E.g., A1, B2
-        const isBooked = seatingLayout.bookedSeats.includes(seatId);
+      let rowSeats = [];
+      for (let col = 0; col < seatingLayout.cols; col++) {
+        const seatId = `${String.fromCharCode(65 + row)}${(col + 1)
+          .toString()
+          .padStart(2, "0")}`;
+        const isBooked = seatingLayout.seats_booked.includes(seatId);
         const isSelected = selectedSeats.has(seatId);
 
         rowSeats.push(
           <button
             key={seatId}
             disabled={isBooked}
-            className={`seat ${isSelected ? 'selected' : ''} ${isBooked ? 'booked' : ''}`}
+            className={`seat ${isSelected ? "selected" : ""} ${
+              isBooked ? "booked" : ""
+            }`}
             onClick={() => handleSeatClick(seatId)}
           >
             {seatId}
           </button>
         );
       }
-      seats.push(<div key={`row-${row}`} className="seat-row">{rowSeats}</div>);
+      seats.push(
+        <div key={`row-${row}`} className="seat-row">
+          {rowSeats}
+        </div>
+      );
     }
     return seats;
   };
 
+  const renderSelectedSeatsSummary = () => {
+    const selectedSeatsArray = Array.from(selectedSeats);
+    const totalCost = selectedSeatsArray.length * ticketPrice;
+
+    return (
+      <div className="selected-seats-summary">
+        <p>Selected Seats: {selectedSeatsArray.join(", ")}</p>
+        <p>Total Seats: {selectedSeatsArray.length}</p>
+        <p>Total Cost: ${totalCost.toFixed(2)}</p>
+      </div>
+    );
+  };
+
   return (
-    <div className="seating-chart">
-      {renderSeats()}
-    </div>
+    <>
+      <Header />
+      <div className="seating-chart-container">
+        <h1>{movieTitle}</h1>
+        <div className="seating-chart">{renderSeats()}</div>
+        {renderSelectedSeatsSummary()}
+        <button
+          className="proceed-to-payment-button"
+          onClick={handleProceedToPayment}
+        >
+          Proceed to Payment
+        </button>
+      </div>
+    </>
   );
 };
 
