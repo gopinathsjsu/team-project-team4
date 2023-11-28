@@ -75,7 +75,7 @@ const TheatreShowings = () => {
                   </p>
                 </div>
               </div>
-              <div className="theatre-list">
+              <div>
                 <button
                   onClick={() => toggleShowtimes(movieId)}
                   className="show-date"
