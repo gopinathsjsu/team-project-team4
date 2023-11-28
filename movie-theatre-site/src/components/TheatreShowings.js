@@ -31,7 +31,7 @@ const TheatreShowings = () => {
           };
         }
         setMovieShowtimes(movies);
-        console.log(movies);
+        console.log(movies)
       } catch (error) {
         console.error("Error:", error);
       }
@@ -40,13 +40,17 @@ const TheatreShowings = () => {
     fetchTheatreShowings();
   }, [theatreId]);
 
+  const toggleShowtimes = (movieId) => {
+    setExpandedMovieId(expandedMovieId === movieId ? null : movieId);
+  };
+
   return (
     <div>
       <Header />
       {/* Theatre information */}
-      <div>
+      <div className="title">
         <h2>
-          {theatre.theatreName} ({theatre.city})
+          {theatre.theatreName} - {theatre.city}
         </h2>
       </div>
       {/* Movies and Showtimes information */}
@@ -71,13 +75,25 @@ const TheatreShowings = () => {
                   </p>
                 </div>
               </div>
-
-              <div className="showtimes1">
-                {movieData.showtimes.map((showtime, index) => (
-                  <span key={index} className="showtime">
-                    {showtime.showStartTime}
+              <div className="theatre-list">
+                <button
+                  onClick={() => toggleShowtimes(movieId)}
+                  className="show-date"
+                >
+                  Showtimes
+                  <span className="arrow">
+                    {expandedMovieId === movieId ? "▲" : "▼"}
                   </span>
-                ))}
+                </button>
+                {expandedMovieId === movieId && (
+                  <div className="showtimes1">
+                    {movieData.showtimes.map((showtime, index) => (
+                      <span key={index} className="showtime">
+                        {showtime.showStartTime}
+                      </span>
+                    ))}
+                  </div>
+                )}
               </div>
             </div>
           ))

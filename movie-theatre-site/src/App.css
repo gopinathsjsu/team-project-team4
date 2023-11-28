@@ -315,11 +315,50 @@ footer {
   border-radius: 5px;
 }
 
-/* TheatreShowings.js */
+/* Theatres */
 .movie-tile-with-showtimes {
   display: flex;
   gap: 16px;
   padding: 16px;
   border-radius: 8px;
   transition: transform 0.2s;
+}
+
+.title {
+  background: none;
+  border: none;
+  width: 100%;
+  padding: 10px;
+  font-size: 30px;
+  text-align: center;
+}
+
+.theatre-tile {
+  background: none;
+  border: none;
+  width: 100%;
+  padding: 10px;
+  font-size: 20px;
+  text-align: center;
+}
+
+.theatre-tile:hover {
+  background-color: #f0f0f0;
+}
+
+.show-date {
+  background: none;
+  border: none;
+  text-align: left;
+  width: 100%;
+  padding: 10px;
+  font-size: 18px;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.show-date:hover {
+  background-color: #f0f0f0;
 }

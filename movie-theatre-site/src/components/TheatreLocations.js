@@ -17,13 +17,16 @@ const TheatreLocations = () => {
   return (
     <div>
       <Header />
+      <div className="title">Choose from one of our locations!</div>
       <ul>
-        {theatres.map((location) =>(
+        {theatres.map((location) => (
+          <div className="theatre-tile">
             <li key={location._id}>
-            <Link to={`/theatrelocations/${location._id}`}>
-              {location.theatreName} ({location.city})
-            </Link>
-          </li>
+              <Link to={`/theatrelocations/${location._id}`}>
+                {location.theatreName} - {location.city}
+              </Link>
+            </li>
+          </div>
         ))}
       </ul>
     </div>
