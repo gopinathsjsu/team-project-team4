@@ -1,6 +1,8 @@
 import React from 'react';
-import './App.css';
-import {Routes,Route} from "react-router-dom";
+import './App.css'
+import { Routes, Route } from 'react-router-dom';
+import { AuthProvider } from './components/AuthContext';
+import Layout from './components/Layout';
 import Dashboard from './components/Dashboard';
 import Home from './components/Home';
 import Login from './components/Login';
@@ -12,22 +14,26 @@ import About from './components/About';
 import Contact from './components/Contact';
 import Seating from './components/Seating';
 import MovieDetail from './components/MovieDetail';
+import UpdateMovie from './components/UpdateMovie';
+
 function App() {
   return (
+    <AuthProvider>
       <Routes>
-        <Route path='*' element={<Home/>}/>
-        <Route path='/dashboard' element={<Dashboard/>}/>
-        <Route path='/login' element={<Login/>}/>
-        <Route path='/signup' element={<SignUp/>}/>
-        <Route path='/movielistings' element={<MovieListings/>}/>
-        <Route path='/showtimes' element={<Showtimes/>}/>
-        <Route path='/booktickets' element={<BookTickets/>}/>
-        <Route path='/about' element={<About/>}/>
-        <Route path='/contactus' element={<Contact/>}/>
-        <Route path='/seating' element={<Seating/>}/>
-        <Route path='/movie/:movieId' element={<MovieDetail/>}/>
+        <Route path='*' element={<Layout><Home /></Layout>} />
+        <Route path='/dashboard' element={<Layout><Dashboard /></Layout>} />
+        <Route path='/login' element={<Layout><Login /></Layout>} />
+        <Route path='/signup' element={<Layout><SignUp /></Layout>} />
+        <Route path='/movielistings' element={<Layout><MovieListings /></Layout>} />
+        <Route path='/showtimes' element={<Layout><Showtimes /></Layout>} />
+        <Route path='/booktickets' element={<Layout><BookTickets /></Layout>} />
+        <Route path='/about' element={<Layout><About /></Layout>} />
+        <Route path='/contactus' element={<Layout><Contact /></Layout>} />
+        <Route path='/seating' element={<Layout><Seating /></Layout>} />
+        <Route path='/movie/:movieId' element={<Layout><MovieDetail /></Layout>} />
+        <Route path="/update-movie/:id" element={<Layout><UpdateMovie /></Layout>} />
       </Routes>
-    
+    </AuthProvider>
   );
 }
 
