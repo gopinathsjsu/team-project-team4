@@ -583,3 +583,67 @@ footer {
 .home-button:hover {
   background-color: #0056b3;
 }
+/* Payment OverView.js*/
+.payment-overview-container {
+  background: #f4f4f4;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  max-width: 600px;
+  margin: 30px auto;
+  text-align: center;
+}
+
+.payment-overview-container h1 {
+  color: #333;
+  font-size: 1.8em;
+  margin-bottom: 10px;
+}
+
+.payment-overview-container img.movie-poster {
+  width: 50%;
+  height: auto;
+  margin: 20px 0;
+  border-radius: 8px;
+}
+
+.payment-overview-container h2 {
+  font-size: 1.5em;
+  margin-bottom: 5px;
+  color: #444;
+}
+
+.payment-overview-container p {
+  font-size: 1.1em;
+  margin-bottom: 15px;
+  color: #666;
+}
+
+.payment-methods {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.payment-methods button {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  margin: 10px 0;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  font-size: 1em;
+  width: 80%;
+  max-width: 300px; /* Ensuring buttons don't get too wide on larger screens */
+}
+
+.payment-methods button:hover {
+  background-color: #0056b3;
+}
+
+.payment-methods button:active {
+  background-color: #003d82;
+}
+

@@ -8,6 +8,7 @@ const SeatingChart = () => {
   const [selectedSeats, setSelectedSeats] = useState(new Set());
   const [ticketPrice, setTicketPrice] = useState(0);
   const [movieTitle, setMovieTitle] = useState("");
+  const [movieImage, setMovieImage] = useState("");
   const { showtimeId } = useParams();
   const navigate = useNavigate(); 
 
@@ -16,16 +17,18 @@ const SeatingChart = () => {
       try {
         // Fetch showtime details including movieId
         const showtimeResponse = await axios.get(`/showtimes/${showtimeId}`);
-        const { rows, cols, seats_booked, movieId, price } =
+        const { rows, cols, seats_booked, movieid, price } =
           showtimeResponse.data;
         setSeatingLayout({ rows, cols, seats_booked });
         setTicketPrice(price); // Set ticket price from API response
 
         // Fetch movie details
-        if (movieId) {
-          const movieResponse = await axios.get(`/movies/${movieId}`);
+        if (movieid) {
+          const movieResponse = await axios.get(`/movies/${movieid}`);
           setMovieTitle(movieResponse.data.movieName);
+          setMovieImage(movieResponse.data.img)
         }
+        
       } catch (error) {
         console.error("Error fetching showtime and movie data:", error);
       }
@@ -44,18 +47,18 @@ const SeatingChart = () => {
     setSelectedSeats(updatedSelectedSeats);
   };
   const handleProceedToPayment = () => {
-    // Calculate the total cost based on the number of selected seats and ticket price
     const selectedSeatsArray = Array.from(selectedSeats);
-    const totalCost = selectedSeatsArray.length * ticketPrice;
+    const serviceFee = 1.5; // Service fee
+    const totalCost = (selectedSeatsArray.length * ticketPrice) + serviceFee;
   
-    // Prepare the data to be passed to the payment page
-    const paymentData = {
-      totalCost,
-      numberOfSeats: selectedSeatsArray.length,
-      selectedSeats: selectedSeatsArray,
-      movieTitle
-    };
-    navigate("/payment", { state: paymentData });
+    navigate("/payment-overview", { // Ensure this route is correct
+      state: {
+        movieTitle,
+        movieImage, // Ensure you have the image URL from the movie state
+        selectedSeats: selectedSeatsArray,
+        totalCost, // This now includes the service fee
+      },
+    });
   };
   const renderSeats = () => {
     if (!seatingLayout) return null;

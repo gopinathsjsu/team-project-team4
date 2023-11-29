@@ -25,7 +25,6 @@ const MovieDetail = () => {
             `/movies?movieid=${movieId}&theatreid=${theatresData[i]._id}`
           );
           const shows = await showsData.json();
-          console.log(shows);
           theatreShowtimesMap[theatresData[i]._id] = {
             theatreName: theatresData[i].theatreName,
             city: theatresData[i].city,

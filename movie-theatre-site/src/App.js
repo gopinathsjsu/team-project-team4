@@ -19,6 +19,7 @@ import UpdateMovie from './components/UpdateMovie';
 import MembershipOptions from './components/MembershipOptions';
 import SeatingChart from './components/SeatingChart';
 import Payment from './components/Payment';
+import PaymentOverview from './components/PaymentOverview';
 
 function App() {
   return (
@@ -40,6 +41,7 @@ function App() {
         <Route path="/update-movie/:id" element={<Layout><UpdateMovie /></Layout>} />
         <Route path='/memberships' element={<Layout><MembershipOptions/></Layout>}/>
         <Route path="/payment" element={<Layout><PaymentPage /></Layout>} />
+        <Route path='/payment-overview' element={<Layout><PaymentOverview/></Layout>}/>
       </Routes>
     </AuthProvider>
   );

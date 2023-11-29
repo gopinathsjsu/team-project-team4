@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import Header from './Header';
 
 const Showtimes = () => {
   const [moviesWithShowtimes, setMoviesWithShowtimes] = useState([]);
@@ -39,6 +40,7 @@ const Showtimes = () => {
 
   return (
     <div>
+      <Header />
       <h1>All Movies and Showtimes</h1>
       {moviesWithShowtimes.map(movie => (
         <div key={movie._id}>
