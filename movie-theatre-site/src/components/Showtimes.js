@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import Header from './Header';
 
 const Showtimes = () => {
   const [moviesWithShowtimes, setMoviesWithShowtimes] = useState([]);
@@ -39,19 +38,20 @@ const Showtimes = () => {
   }, []);
 
   return (
-    <div>
-      <Header />
+    <div className="showtimes-container">
       <h1>All Movies and Showtimes</h1>
       {moviesWithShowtimes.map(movie => (
-        <div key={movie._id}>
-          <h2>{movie.movieName}</h2>
-          <img src={movie.img} alt={movie.movieName} style={{ maxWidth: '200px' }} />
+        <div key={movie._id} className="movie-entry">
+          <h2 className="movie-title">{movie.movieName}</h2>
+          <img src={movie.img} alt={movie.movieName} className="movie-poster" />
           {movie.theatres.map(theatre => (
-            <div key={theatre._id}>
-              <h3>{theatre.theatreName}</h3>
-              {theatre.showtimes.map(showtime => (
-                <p key={showtime._id}>{showtime.showStartTime}</p>
-              ))}
+            <div key={theatre._id} className="theatre-entry">
+              <h3 className="theatre-name">{theatre.theatreName}</h3>
+              <ul className="showtime-list">
+                {theatre.showtimes.map(showtime => (
+                  <li key={showtime._id} className="showtime-item">{showtime.showStartTime}</li>
+                ))}
+              </ul>
             </div>
           ))}
         </div>

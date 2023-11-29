@@ -30,7 +30,6 @@ const PaymentOverview = () => {
       <div className="payment-methods">
         <button onClick={() => handlePaymentSubmission('rewardPoints')}>Pay with Reward Points</button>
         <button onClick={() => handlePaymentSubmission('money')}>Pay with Money</button>
-        <button onClick={() => handlePaymentSubmission('both')}>Pay with Both</button>
       </div>
     </div>
   );

@@ -647,3 +647,51 @@ footer {
   background-color: #003d82;
 }
 
+/*Showtimes.js*/
+
+/* Showtimes.css */
+.showtimes-container {
+  padding: 20px;
+  max-width: 800px;
+  margin: auto;
+}
+
+.movie-entry {
+  margin-bottom: 40px;
+  background-color: #f3f3f3;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.movie-title {
+  margin-bottom: 15px;
+  color: #333;
+}
+
+.movie-poster {
+  max-width: 200px;
+  margin-bottom: 15px;
+}
+
+.theatre-entry {
+  margin-top: 10px;
+}
+
+.theatre-name {
+  color: #555;
+  margin-bottom: 5px;
+}
+
+.showtime-list {
+  list-style: none;
+  padding: 0;
+}
+
+.showtime-item {
+  background-color: #eee;
+  padding: 5px 10px;
+  border-radius: 5px;
+  display: inline-block;
+  margin-right: 10px;
+  margin-bottom: 10px;
+}
