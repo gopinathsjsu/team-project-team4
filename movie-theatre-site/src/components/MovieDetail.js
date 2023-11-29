@@ -95,6 +95,8 @@ const MovieDetail = () => {
                       to={`/seating/${showtime._id}`}
                       className="showtime-link"
                     >
+                      {/* <span>{showtime.showDate}</span> */}
+                      
                       <span>{showtime.showStartTime}</span>
                     </Link>
                   ))}

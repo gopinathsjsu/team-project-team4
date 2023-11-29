@@ -93,12 +93,13 @@ const SeatingChart = () => {
 
   const renderSelectedSeatsSummary = () => {
     const selectedSeatsArray = Array.from(selectedSeats);
-    const totalCost = selectedSeatsArray.length * ticketPrice;
+    const totalCost = (selectedSeatsArray.length * ticketPrice)+1.5;
 
     return (
       <div className="selected-seats-summary">
         <p>Selected Seats: {selectedSeatsArray.join(", ")}</p>
         <p>Total Seats: {selectedSeatsArray.length}</p>
+        <p>Service Fee: $1.50</p>
         <p>Total Cost: ${totalCost.toFixed(2)}</p>
       </div>
     );
