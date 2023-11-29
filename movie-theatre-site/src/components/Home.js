@@ -1,13 +1,14 @@
 // Dashboard.js
 import React from "react";
-import Header from './Header';
+//import Header from './Header';
 import Hero from './Hero';
 import Features from './Features';
 import Footer from './Footer';
+
 const Home = () => {
   return (
       <div className="App">
-        <Header />
+        {/* <Header /> */}
         <Hero />
         <Features />
         <Footer />
