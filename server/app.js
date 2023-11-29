@@ -17,6 +17,7 @@ const screensRoutes = require('./endpointRoutes/screensEndpoint');
 const showtimesRoutes = require('./endpointRoutes/showtimesEndpoint');
 const ticketsRoutes = require('./endpointRoutes/ticketsEndpoint');
 const signInRoutes = require('./endpointRoutes/SignInEndpoint');
+const verifyTokenRoutes = require('./endpointRoutes/verifyTokenEndpoint');
 
 
 const cors = require('cors');
@@ -36,5 +37,5 @@ app.use(screensRoutes);
 app.use(showtimesRoutes);
 app.use(ticketsRoutes);
 app.use(signInRoutes);
-
+app.use(verifyTokenRoutes);
 module.exports = app;
