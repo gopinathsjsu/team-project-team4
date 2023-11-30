@@ -30,7 +30,7 @@ const TheatreShowings = () => {
           };
         }
         setMovieShowtimes(movies);
-        console.log(movies)
+        console.log(movies);
       } catch (error) {
         console.error("Error:", error);
       }
@@ -46,10 +46,11 @@ const TheatreShowings = () => {
   return (
     <div>
       {/* Theatre information */}
-      <div className="title">
-        <h2>
-          {theatre.theatreName} - {theatre.city}
-        </h2>
+      <div className="hero">
+        <h1>{theatre.theatreName}</h1>
+        <p>
+          <i>{theatre.city}</i>
+        </p>
       </div>
       {/* Movies and Showtimes information */}
       <div>
