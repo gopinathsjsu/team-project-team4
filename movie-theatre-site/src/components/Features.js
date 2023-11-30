@@ -20,6 +20,10 @@ const Features = () => {
       <a href='/booktickets' className='link-'><h2>Book Tickets</h2></a>
         <p>Book tickets online and save time.</p>
       </div>
+      <div className="feature">
+      <a href='/memberships' className='link-'><h2>Memberships</h2></a>
+        <p>Become a member and enjoy a variety of perks.</p>
+      </div>
     </section>
   );
 };
