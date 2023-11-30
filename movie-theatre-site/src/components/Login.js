@@ -21,9 +21,8 @@ function Login() {
                 body: JSON.stringify({ username, password }),
             });
             const data = await response.json();
-            //console.log(data);
             if (response.ok) {
-                setAuth({ isAuthenticated: true, user: data.name });
+                setAuth({ isAuthenticated: true, user: data.name, role: data.role, id: data.id });
                 localStorage.setItem('token', data.token);
                 navigate('/Home'); // Ensure this is the correct route you have in your <Routes> setup
             } else {
