@@ -57,8 +57,13 @@ const MovieListings = () => {
       <ul className="movies-list">
         {filteredMovies.map((movie) => (
           <li key={movie._id} className="movie-tile">
+            {/* Wrap movie details in a Link component */}
             <Link to={`/movie/${movie._id}`}>
-              <img src={movie.img} alt={movie.movieName} className="movie-image" />
+              <img
+                src={movie.img}
+                alt={movie.movieName}
+                className="movie-image"
+              />
             </Link>
             <div>
               <h2>{movie.movieName}</h2>

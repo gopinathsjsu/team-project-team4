@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import Header from "./Header";
 
 const TheatreLocations = () => {
   const [theatres, setTheatres] = useState([]);
@@ -16,7 +15,6 @@ const TheatreLocations = () => {
 
   return (
     <div>
-      <Header />
       <div className="hero"><h1>Locations</h1></div>
       <ul>
         {theatres.map((location) => (

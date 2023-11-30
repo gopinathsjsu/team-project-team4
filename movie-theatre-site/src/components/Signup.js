@@ -2,10 +2,9 @@ import React, { useCallback, useState } from "react";
 
 import axios from "axios";
 
-import Snackbar from "@mui/material/Snackbar";
-import Header from "./Header";
+import { Snackbar } from "@mui/material";
 
-import MuiAlert, { AlertProps } from "@mui/material/Alert";
+import MuiAlert from "@mui/material/Alert";
 import { useNavigate } from "react-router-dom";
 
 const Alert = React.forwardRef(function Alert(props, ref) {
@@ -53,9 +52,6 @@ function Signup() {
   }, []);
   return (
     <>
-      <div>
-        <Header />
-      </div>
       <div className="auth-container">
         <h2>Sign Up for Movie Theatre</h2>
         <form onSubmit={onsignup}>
@@ -114,21 +110,23 @@ function Signup() {
           Already have an account? <a href="/login">Login</a>
         </div>
       </div>
-      <Snackbar
+      {/* <Snackbar
         open={open}
         autoHideDuration={3000}
-        message={msg}
-        // action={action}
+        message={msg.m}
+        transitionDuration={{ enter: 10, exit: 10 }}
       >
-        <Alert
-          onClose={() => setOpen(false)}
-          severity={msg.t}
-          sx={{ width: "100%" }}
-        >
-          {msg.m}&nbsp;
-          {msg.t === "success" ? "Redirecting to login..." : null}
-        </Alert>
-      </Snackbar>
+        <div>
+          <Alert
+            onClose={() => setOpen(false)}
+            severity={msg.t}
+            sx={{ width: "100%" }}
+          >
+            {msg.m}&nbsp;
+            {msg.t === "success" ? "Redirecting to login..." : null}
+          </Alert>
+        </div>
+      </Snackbar> */}
     </>
   );
 }

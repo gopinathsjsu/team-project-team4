@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const Showtimes = require('../models/showtimesModel');
 const mw = require('../services/middleware');
+const Screens = require('../models/screensModel');
 
 router.get('/showtimes', async (request, response) => {
     try {
@@ -16,8 +17,21 @@ router.get('/showtimes', async (request, response) => {
 router.get('/showtimes/:id', async (request, response) => {
     try {
         const { id }  = request.params;
-        const showtime = await Showtimes.findById(id);
-        return response.status(200).json(showtime);
+        let showtime = await Showtimes.findById(id);
+        let screen = await Screens.findById(showtime.screen_id);
+        const finshowtime = {
+            _id : id,
+            movieid : showtime.movieid,
+            showDate : showtime.showDate,
+            showStartTime : showtime.showStartTime,
+            price : showtime.price,
+            seats_booked : showtime.seats_booked,
+            screen_id : showtime.screen_id,
+            rows : screen.rows,
+            cols : screen.cols
+        }
+        console.log(finshowtime);
+        return response.status(200).json(finshowtime);
     } catch (error) {
         console.log(error.message);
         response.status(500).send({message : error.message});
