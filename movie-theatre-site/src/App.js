@@ -1,6 +1,8 @@
 import React from 'react';
-import './App.css';
-import {Routes,Route} from "react-router-dom";
+import './App.css'
+import { Routes, Route } from 'react-router-dom';
+import { AuthProvider } from './components/AuthContext';
+import Layout from './components/Layout';
 import Dashboard from './components/Dashboard';
 import Home from './components/Home';
 import Login from './components/Login';
@@ -14,8 +16,11 @@ import Seating from './components/Seating';
 import MovieDetail from './components/MovieDetail';
 import TheatreLocations from './components/TheatreLocations';
 import TheatreShowings from './components/TheatreShowings';
+import UpdateMovie from './components/UpdateMovie';
+
 function App() {
   return (
+    <AuthProvider>
       <Routes>
         <Route path='*' element={<Home/>}/>
         <Route path='/dashboard' element={<Dashboard/>}/>
@@ -30,8 +35,10 @@ function App() {
         <Route path='/seating' element={<Seating/>}/>
         <Route path='/movie/:movieId' element={<MovieDetail/>}/>
         <Route path='/theatrelocations/:theatreId' element={<TheatreShowings/>}/>
+        <Route path="/update-movie/:id" element={<Layout><UpdateMovie /></Layout>} />
+
       </Routes>
-    
+    </AuthProvider>
   );
 }
 
