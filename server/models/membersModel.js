@@ -43,7 +43,12 @@ const membersSchema = new mongoose.Schema(
         rewards : {
             type : Number,
             required : false
-        }
+        },
+
+        movieHistory: [{
+            date: Date,
+            movieName: String
+        }]
     }
 )
 
