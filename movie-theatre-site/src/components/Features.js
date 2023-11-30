@@ -21,7 +21,7 @@ const Features = () => {
         <p>Book tickets online and save time.</p>
       </div>
       <div className="feature">
-      <a href='/memberships' className='link-'><h2>Memberships</h2></a>
+      <a href='/memberships' className='link-'><h2>Membership</h2></a>
         <p>Become a member and enjoy a variety of perks.</p>
       </div>
     </section>

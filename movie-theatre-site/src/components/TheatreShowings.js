@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import Header from "./Header";
 
 const TheatreShowings = () => {
   const [theatre, setTheatre] = useState([]);
@@ -31,7 +30,7 @@ const TheatreShowings = () => {
           };
         }
         setMovieShowtimes(movies);
-        console.log(movies)
+        console.log(movies);
       } catch (error) {
         console.error("Error:", error);
       }
@@ -46,12 +45,12 @@ const TheatreShowings = () => {
 
   return (
     <div>
-      <Header />
       {/* Theatre information */}
-      <div className="title">
-        <h2>
-          {theatre.theatreName} - {theatre.city}
-        </h2>
+      <div className="hero">
+        <h1>{theatre.theatreName}</h1>
+        <p>
+          <i>{theatre.city}</i>
+        </p>
       </div>
       {/* Movies and Showtimes information */}
       <div>
