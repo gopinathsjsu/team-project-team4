@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
-import Header from "./Header";
+import { useParams, Link } from "react-router-dom";
 
 const TheatreShowings = () => {
   const [theatre, setTheatre] = useState([]);
@@ -46,7 +45,6 @@ const TheatreShowings = () => {
 
   return (
     <div>
-      <Header />
       {/* Theatre information */}
       <div className="title">
         <h2>
@@ -88,9 +86,15 @@ const TheatreShowings = () => {
                 {expandedMovieId === movieId && (
                   <div className="showtimes1">
                     {movieData.showtimes.map((showtime, index) => (
-                      <span key={index} className="showtime">
-                        {showtime.showStartTime}
-                      </span>
+                      <Link
+                      key={index}
+                      to={`/seating/${showtime._id}`}
+                      className="showtime-link"
+                    >
+                      {/* <span>{showtime.showDate}</span> */}
+                      
+                      <span>{showtime.showStartTime}</span>
+                    </Link>
                     ))}
                   </div>
                 )}
