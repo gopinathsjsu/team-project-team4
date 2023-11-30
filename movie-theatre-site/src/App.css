@@ -330,18 +330,25 @@ footer {
   width: 100%;
   padding: 10px;
   font-size: 30px;
+  text-align: center;
 }
 
 .theatre-tile {
-  background: none;
-  border: none;
-  width: 100%;
-  padding: 10px;
+  display: block;
+  margin-left:auto;
+  margin-right:auto;
+  width: 600px;
+  padding: 16px;
   font-size: 20px;
+  text-align: center;
+  align-items: center;
+  list-style-type: none;
+  box-shadow: 10px 10px 5px lightgray;
 }
 
 .theatre-tile:hover {
-  background-color: #f0f0f0;
+  background-color: #ffe8e0;
+  transform: scale(1.05);
 }
 
 .show-date {
@@ -354,7 +361,7 @@ footer {
   cursor: pointer;
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  text-align: center;
 }
 
 .show-date:hover {
