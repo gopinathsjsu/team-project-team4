@@ -17,7 +17,7 @@ const TheatreLocations = () => {
   return (
     <div>
       <Header />
-      <div className="title"><b>Choose from one of our locations!</b></div>
+      <div className="hero"><h1>Locations</h1></div>
       <ul>
         {theatres.map((location) => (
           <div className="theatre-tile">

@@ -5,8 +5,8 @@ export default function Membership_Options() {
   return (
     <>
       <Header />
-      <div className="membership-title">
-        <i><b>Become a member!</b></i>
+      <div className="hero">
+        <h1><b>Become a member!</b></h1>
       </div>
       <div className="regular-membership-tile">
         <b>Regular membership - <i>FREE</i></b>
@@ -25,7 +25,7 @@ export default function Membership_Options() {
 
         <ul>
           <h2>All the perks of regular membership</h2>
-          <h2><i>PLUS</i> get your online service fee is waived for any booking!</h2>
+          <h2><i>PLUS</i> online service fee waived for any booking!</h2>
         </ul>
       </div>
     </>

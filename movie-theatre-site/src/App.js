@@ -23,21 +23,21 @@ function App() {
   return (
     <AuthProvider>
       <Routes>
-        <Route path='*' element={<Home/>}/>
-        <Route path='/dashboard' element={<Dashboard/>}/>
-        <Route path='/login' element={<Login/>}/>
-        <Route path='/signup' element={<SignUp/>}/>
-        <Route path='/theatrelocations' element={<TheatreLocations/>}/>
-        <Route path='/movielistings' element={<MovieListings/>}/>
-        <Route path='/showtimes' element={<Showtimes/>}/>
-        <Route path='/booktickets' element={<BookTickets/>}/>
-        <Route path='/about' element={<About/>}/>
-        <Route path='/contactus' element={<Contact/>}/>
-        <Route path='/seating' element={<Seating/>}/>
-        <Route path='/movie/:movieId' element={<MovieDetail/>}/>
-        <Route path='/theatrelocations/:theatreId' element={<TheatreShowings/>}/>
+        <Route path='*' element={<Layout><Home/></Layout>}/>
+        <Route path='/dashboard' element={<Layout><Dashboard/></Layout>}/>
+        <Route path='/login' element={<Layout><Login/></Layout>}/>
+        <Route path='/signup' element={<Layout><SignUp/></Layout>}/>
+        <Route path='/theatrelocations' element={<Layout><TheatreLocations/></Layout>}/>
+        <Route path='/movielistings' element={<Layout><MovieListings/></Layout>}/>
+        <Route path='/showtimes' element={<Layout><Showtimes/></Layout>}/>
+        <Route path='/booktickets' element={<Layout><BookTickets/></Layout>}/>
+        <Route path='/about' element={<Layout><About/></Layout>}/>
+        <Route path='/contactus' element={<Layout><Contact/></Layout>}/>
+        <Route path='/seating' element={<Layout><Seating/></Layout>}/>
+        <Route path='/movie/:movieId' element={<Layout><MovieDetail/></Layout>}/>
+        <Route path='/theatrelocations/:theatreId' element={<Layout><TheatreShowings/></Layout>}/>
         <Route path="/update-movie/:id" element={<Layout><UpdateMovie /></Layout>} />
-        <Route path='/memberships' element={<MembershipOptions/>}/>
+        <Route path='/memberships' element={<Layout><MembershipOptions/></Layout>}/>
       </Routes>
     </AuthProvider>
   );
