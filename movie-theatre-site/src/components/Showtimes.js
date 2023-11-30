@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import Header from "./Header";
 import { Link } from "react-router-dom";
 
 const Showtimes = () => {
@@ -49,7 +48,6 @@ const Showtimes = () => {
 
   return (
     <>
-      <Header />
       <div className="showtimes-container">
         <h1>All Movies and Showtimes</h1>
         {moviesWithShowtimes.map((movie) => (

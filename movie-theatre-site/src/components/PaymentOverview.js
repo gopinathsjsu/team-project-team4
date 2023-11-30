@@ -1,6 +1,5 @@
 import React from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import Header from './Header';
 const PaymentOverview = () => {
   const location = useLocation();
   const navigate = useNavigate();
@@ -20,7 +19,7 @@ const PaymentOverview = () => {
   };
 
   return (
-    <><><Header /></><div className="payment-overview-container">
+    <div className="payment-overview-container">
       <h1>Payment Overview</h1>
       <img src={movieImage} alt={movieTitle} className="movie-poster" />
       <h2>{movieTitle}</h2>
@@ -31,7 +30,7 @@ const PaymentOverview = () => {
         <button onClick={() => handlePaymentSubmission('rewardPoints')}>Pay with Reward Points</button>
         <button onClick={() => handlePaymentSubmission('money')}>Pay with Money</button>
       </div>
-    </div></>
+    </div>
   );
 };
 

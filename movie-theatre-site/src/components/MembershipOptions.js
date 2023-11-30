@@ -1,10 +1,8 @@
 //import { Link } from "react-router-dom";
-import Header from "./Header";
 
 export default function Membership_Options() {
   return (
     <>
-      <Header />
       <div className="hero">
         <h1><b>Become a member!</b></h1>
       </div>

@@ -1,7 +1,6 @@
 import React, { useState, useEffect} from "react";
 import axios from "axios";
 import { useParams, useNavigate } from "react-router-dom";
-import Header from "./Header";
 
 const SeatingChart = () => {
   const [seatingLayout, setSeatingLayout] = useState(null);
@@ -110,7 +109,6 @@ const SeatingChart = () => {
 
   return (
     <>
-      <Header />
       <div className="seating-chart-container">
         <h1>{movieTitle}</h1>
         <div className="seating-chart">{renderSeats()}</div>

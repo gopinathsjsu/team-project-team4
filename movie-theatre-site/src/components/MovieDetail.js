@@ -2,8 +2,6 @@ import React, { useState, useEffect } from "react";
 import { useParams,Link } from "react-router-dom";
 import { Card, Image, Stack, CardBody, Heading, Text } from "@chakra-ui/react";
 
-import Header from "./Header";
-
 const MovieDetail = () => {
   const [movie, setMovie] = useState({});
   const [theatreShowtimes, setTheatreShowtimes] = useState({});
@@ -50,7 +48,6 @@ const MovieDetail = () => {
 
   return (
     <div className="movie-detail">
-      <Header />
       <Card
         direction={{ base: "column", sm: "row" }}
         overflow="hidden"

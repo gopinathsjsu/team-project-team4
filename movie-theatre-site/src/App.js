@@ -8,7 +8,6 @@ import Home from './components/Home';
 import Login from './components/Login';
 import SignUp from './components/Signup';
 import MovieListings from './components/MovieListings';
-import BookTickets from './components/BookTickets';
 import Showtimes from './components/Showtimes';
 import About from './components/About';
 import Contact from './components/Contact';
@@ -32,7 +31,6 @@ function App() {
         <Route path='/theatrelocations' element={<Layout><TheatreLocations/></Layout>}/>
         <Route path='/movielistings' element={<Layout><MovieListings/></Layout>}/>
         <Route path='/showtimes' element={<Layout><Showtimes/></Layout>}/>
-        <Route path='/booktickets' element={<Layout><BookTickets/></Layout>}/>
         <Route path='/about' element={<Layout><About/></Layout>}/>
         <Route path='/contactus' element={<Layout><Contact/></Layout>}/>
         <Route path='/seating/:showtimeId' element={<Layout><SeatingChart/></Layout>}/>
@@ -40,7 +38,7 @@ function App() {
         <Route path='/theatrelocations/:theatreId' element={<Layout><TheatreShowings/></Layout>}/>
         <Route path="/update-movie/:id" element={<Layout><UpdateMovie /></Layout>} />
         <Route path='/memberships' element={<Layout><MembershipOptions/></Layout>}/>
-        <Route path="/payment" element={<Layout><PaymentPage /></Layout>} />
+        <Route path="/payment" element={<Layout><Payment /></Layout>} />
         <Route path='/payment-overview' element={<Layout><PaymentOverview/></Layout>}/>
       </Routes>
     </AuthProvider>
