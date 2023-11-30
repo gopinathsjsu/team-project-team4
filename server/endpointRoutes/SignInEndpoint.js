@@ -22,7 +22,6 @@ router.post('/api/signin', async (req, res) => {
         if (!isMatch) {
             return res.status(401).json({ error: 'Invalid credentials.' });
         }
-        
         const token = jwt.sign(
           {
             role: user.role,
@@ -34,6 +33,7 @@ router.post('/api/signin', async (req, res) => {
         );
         
         res.status(200).json({
+          id: user._id,
           role: user.role,
           name: user.username, // Or user.name
           email: user.email,
