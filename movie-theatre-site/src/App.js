@@ -15,6 +15,7 @@ import Contact from './components/Contact';
 import Seating from './components/Seating';
 import MovieDetail from './components/MovieDetail';
 import UpdateMovie from './components/UpdateMovie';
+import Profile from './components/profile';
 
 function App() {
   return (
@@ -32,6 +33,7 @@ function App() {
         <Route path='/seating' element={<Layout><Seating /></Layout>} />
         <Route path='/movie/:movieId' element={<Layout><MovieDetail /></Layout>} />
         <Route path="/update-movie/:id" element={<Layout><UpdateMovie /></Layout>} />
+        <Route path="/profile" element={<Layout><Profile /></Layout>} />
       </Routes>
     </AuthProvider>
   );
