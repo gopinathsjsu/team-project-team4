@@ -7,6 +7,7 @@ const Payment = () => {
   const navigate = useNavigate();
   const { totalCost, numberOfSeats, selectedSeats, movieTitle } = location.state || {};
 
+
   // Handling the case where no booking data is passed to the component
   if (!location.state) {
     return <p>No booking information found.</p>; // Optionally, redirect to a different page or show a different message

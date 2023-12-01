@@ -55,7 +55,8 @@ const SeatingChart = () => {
         movieTitle,
         movieImage, // Ensure you have the image URL from the movie state
         selectedSeats: selectedSeatsArray,
-        totalCost, // This now includes the service fee
+        totalCost,
+        showtimeId // This now includes the service fee
       },
     });
   };
