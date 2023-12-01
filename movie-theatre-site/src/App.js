@@ -15,6 +15,7 @@ import MovieDetail from './components/MovieDetail';
 import TheatreLocations from './components/TheatreLocations';
 import TheatreShowings from './components/TheatreShowings';
 import UpdateMovie from './components/UpdateMovie';
+import Profile from './components/profile';
 import MembershipOptions from './components/MembershipOptions';
 import SeatingChart from './components/SeatingChart';
 import Payment from './components/Payment';
@@ -37,6 +38,7 @@ function App() {
         <Route path='/movie/:movieId' element={<Layout><MovieDetail/></Layout>}/>
         <Route path='/theatrelocations/:theatreId' element={<Layout><TheatreShowings/></Layout>}/>
         <Route path="/update-movie/:id" element={<Layout><UpdateMovie /></Layout>} />
+        <Route path="/profile" element={<Layout><Profile /></Layout>} />
         <Route path='/memberships' element={<Layout><MembershipOptions/></Layout>}/>
         <Route path="/payment" element={<Layout><Payment /></Layout>} />
         <Route path='/payment-overview' element={<Layout><PaymentOverview/></Layout>}/>

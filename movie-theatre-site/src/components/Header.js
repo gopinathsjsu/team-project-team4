@@ -26,8 +26,10 @@ const Header = () => {
         <div className="sign">
           {auth.isAuthenticated ? (
             <>
-              <span>Welcome, {auth.user}</span> {/* Adjust as necessary if auth.user is an object */}
+              <span>Welcome, {auth.user}</span> {/* Adjust if auth.user is an object */}
               <button onClick={handleSignOut} className="link">Sign Out</button>
+              {/* Add My Profile button */}
+              <Link to="/profile" className="link">My Profile</Link>
             </>
           ) : (
             <>
