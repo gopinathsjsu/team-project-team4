@@ -141,7 +141,6 @@ const Showtimes = () => {
   };
 
   if (isLoading) {
-    // Display "Loading..." text while data is loading
     return <div style={{ textAlign: 'center', marginTop: '20px' }}>Loading...</div>;
   }
   return (
