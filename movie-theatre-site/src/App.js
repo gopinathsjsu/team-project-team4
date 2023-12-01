@@ -19,6 +19,7 @@ import MembershipOptions from './components/MembershipOptions';
 import SeatingChart from './components/SeatingChart';
 import Payment from './components/Payment';
 import PaymentOverview from './components/PaymentOverview';
+import Profile from './components/profile';
 
 function App() {
   return (
@@ -40,6 +41,7 @@ function App() {
         <Route path='/memberships' element={<Layout><MembershipOptions/></Layout>}/>
         <Route path="/payment" element={<Layout><Payment /></Layout>} />
         <Route path='/payment-overview' element={<Layout><PaymentOverview/></Layout>}/>
+        <Route path="/profile" element={<Layout><Profile /></Layout>} />
       </Routes>
     </AuthProvider>
   );
