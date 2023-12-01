@@ -29,7 +29,7 @@ const Header = () => {
               <span>Welcome, {auth.user}</span> {/* Adjust if auth.user is an object */}
               <button onClick={handleSignOut} className="link">Sign Out</button>
               {/* Add My Profile button */}
-              <Link to="/profile" className="link">My Profile</Link>
+              {auth.role !== 'admin' && <Link to="/profile" className="link">My Profile</Link>}
             </>
           ) : (
             <>
