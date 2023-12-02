@@ -4,6 +4,13 @@ const Screens = require('../models/screensModel');
 
 router.get('/screens', async (request, response) => {
     try {
+        const { theatreid } = request.query;
+        if(theatreid)
+        {
+            const screens = await Screens.find({theatre_id : theatreid});
+            console.log(screens);
+            return response.status(200).json(screens);
+        }
         const screens = await Screens.find({});
         return response.status(200).json(screens);
     } catch (error) {

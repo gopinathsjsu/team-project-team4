@@ -266,6 +266,22 @@ footer {
   background-color: #0f0;
 }
 
+.admin-controls button {
+  padding: 8px 8px;
+  border: 8px;
+  background-color: #007bff;
+  margin: 4px;
+  color: white;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background-color 0.3s;
+}
+
+.admin-controls button:hover {
+  background-color: #0056b3;
+}
+
+
 /*MovieDetails.js*/
 
 .theatre-list {
@@ -313,4 +329,49 @@ footer {
   background-color: #e0e0e0;
   padding: 5px 10px;
   border-radius: 5px;
+}
+
+.update-movie-container {
+  max-width: 500px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.update-movie-form {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: 1fr;
+}
+
+.update-movie-form .form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.update-movie-form label {
+  margin-bottom: 0.5rem;
+}
+
+.update-movie-form input,
+.update-movie-form textarea {
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.update-movie-form .update-movie-btn {
+  background-color: #5cb85c;
+  color: white;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.update-movie-form .update-movie-btn:hover {
+  background-color: #4cae4c;
 }
