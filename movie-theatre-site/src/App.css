@@ -488,7 +488,8 @@ footer {
 /* Add this if you want a specific font for both sections */
 .profile-details, .movie-history-list {
   font-family: 'Arial', sans-serif;
-=======
+}
+
 /* Membership Options page */
 .membership-title {
   background: none;
