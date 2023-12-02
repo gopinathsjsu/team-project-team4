@@ -472,13 +472,13 @@ footer {
   text-align: center;
 }
 
-.profile-details, .movie-history-list {
+.profile-details, .movie-history-list, .purchased-tickets-list {
   text-align: left;
   padding: 0;
   list-style-type: none;
 }
 
-.profile-details li, .movie-history-list li {
+.profile-details li, .movie-history-list, .purchased-tickets-list li {
   background: #f8f8f8;
   margin-bottom: 1rem;
   padding: 1rem;
@@ -486,7 +486,7 @@ footer {
 }
 
 /* Add this if you want a specific font for both sections */
-.profile-details, .movie-history-list {
+.profile-details, .movie-history-list, .purchased-tickets-list {
   font-family: 'Arial', sans-serif;
 }
 
@@ -530,13 +530,18 @@ footer {
   box-shadow: 10px 10px 5px lightgray;
 }
 
-.regular-membership-tile:hover {
-  transform: scale(1.05);
+.membership-button {
+  background-color: #ff5722;
+  color: white;
+  padding: 1rem 2rem;
+  font-size: 20px;
+  cursor: pointer;
+  display: block;
+  margin-left:auto;
+  margin-right:auto;
+  margin-top: 50px;
 }
 
-.premium-membership-tile:hover {
-  transform: scale(1.05);
-}
 /* Seating.js*/
 
 /*SeatingChart.js*/

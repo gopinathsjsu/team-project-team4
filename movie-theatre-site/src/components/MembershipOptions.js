@@ -1,10 +1,13 @@
-//import { Link } from "react-router-dom";
+import { Link } from "react-router-dom";
+import { useAuth } from './AuthContext';
 
 export default function Membership_Options() {
+  const { auth, setAuth } = useAuth();
+
   return (
     <>
       <div className="hero">
-        <h1><b>Become a member!</b></h1>
+        <h1>Membership</h1>
       </div>
       <div className="regular-membership-tile">
         <b>Regular membership - <i>FREE</i></b>
@@ -26,6 +29,13 @@ export default function Membership_Options() {
           <h2><i>PLUS</i> online service fee waived for any booking!</h2>
         </ul>
       </div>
+
+      <button className="membership-button">
+      {!auth.isAuthenticated || (auth.isAuthenticated && auth.role === 'guest') ?
+        (<Link to="/signup">Become a member</Link>) :
+        (<p>Do nothing</p>)}
+          {/*(<Link to="/profile">Update your membership</Link>)}*/} {/* Why does isAuth reset? */}  
+      </button>
     </>
   );
 }

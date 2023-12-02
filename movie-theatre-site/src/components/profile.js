@@ -4,10 +4,12 @@ import { useAuth } from './AuthContext';
 const Profile = () => {
     const [memberData, setMemberData] = useState(null);
     const [movieHistory, setMovieHistory] = useState([]);
+    const [myTickets, setMyTickets] = useState([]);
+    const [ticketDetails, setTicketDetails] = useState([]);
     const { auth } = useAuth(); 
     
-    console.log("In Profile");
-    console.log(auth);
+    //console.log("In Profile");
+    //console.log(auth);
     const id = auth.id; // Adjust according to your auth object structure
 
     useEffect(() => {
@@ -22,6 +24,30 @@ const Profile = () => {
                 const historyResponse = await fetch(`/member/${id}/movie-history`);
                 const historyData = await historyResponse.json();
                 setMovieHistory(historyData);
+
+                // Fetch tickets purchased
+                const ticketsResponse = await fetch(`/tickets`);
+                const ticketsData = await ticketsResponse.json();
+                setMyTickets(ticketsData.filter((ticket) => ticket.memberid === id));
+
+                let ticketData = {};
+                for (let i = 0; i < myTickets.length; i++) {
+                    console.log(myTickets[i]);
+                    const showtimeResponse = await fetch(`/showtimes/${myTickets[i].showid}`);
+                    const showtime = await showtimeResponse.json();
+                    
+                    const movieResponse = await fetch(`/movies/${showtime.movieid}`);
+                    const movieData = await movieResponse.json();
+
+                    ticketData[myTickets[i]._id] = {
+                        ticket: myTickets[i],
+                        show: showtime,
+                        movie: movieData,
+                    };
+
+                }
+                setTicketDetails(ticketData);
+
             } catch (error) {
                 console.error('Error fetching data:', error);
             }
@@ -53,6 +79,19 @@ const Profile = () => {
                             ))
                         ) : (
                             <li>No recent movie history available.</li>
+                        )}
+                    </ul>
+
+                    <h2>My Tickets</h2>
+                    <ul className="purchased-tickets-list">
+                        {Object.keys(ticketDetails).length ? (
+                            Object.entries(ticketDetails).map(([ticketId, ticketData]) => (
+                                <li key={ticketId}>
+                                    {ticketData.movie.movieName}
+                                </li>
+                            ))
+                        ) : (
+                            <li>You have no current movie tickets.</li>
                         )}
                     </ul>
                 </>

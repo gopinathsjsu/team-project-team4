@@ -15,7 +15,7 @@ router.post('/api/signin', async (req, res) => {
 
         const user = await Members.findOne({ username });
         if (!user) {
-            return res.status(401).json({ error: 'Invalid credentials.' });
+            return res.status(401).json({ error: 'Invalid username.' });
         }
 
         const isMatch = await bcrypt.compare(password, user.password);
