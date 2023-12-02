@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams,Link } from "react-router-dom";
+import { Card, Image, Stack, CardBody, Heading, Text } from "@chakra-ui/react";
 
 const MovieDetail = () => {
   const [movie, setMovie] = useState({});
@@ -17,17 +18,16 @@ const MovieDetail = () => {
         let theatreShowtimesMap = {};
         const theatres = await fetch(`/movies?movieid=${movieId}`);
         const theatresData = await theatres.json();
-        for(let i=0;i<theatresData.length;i++)
-        {
-          const showsData = await fetch(`/movies?movieid=${movieId}&theatreid=${theatresData[i]._id}`);
+        for (let i = 0; i < theatresData.length; i++) {
+          const showsData = await fetch(
+            `/movies?movieid=${movieId}&theatreid=${theatresData[i]._id}`
+          );
           const shows = await showsData.json();
-          console.log(shows);
           theatreShowtimesMap[theatresData[i]._id] = {
             theatreName: theatresData[i].theatreName,
-              city: theatresData[i].city,
-              showtimes: shows,
-          }
-          
+            city: theatresData[i].city,
+            showtimes: shows,
+          };
         }
         setTheatreShowtimes(theatreShowtimesMap);
       } catch (error) {
@@ -48,15 +48,26 @@ const MovieDetail = () => {
 
   return (
     <div className="movie-detail">
-      {/* Movie information */}
-      <div className="movie-tile1">
-        <img src={movie.img} alt={movie.title} className="movie-image" />
-        <div className="movie-info">
-          <h2>{movie.movieName}</h2>
-          <p>Status: {movie.status}</p>
-          <p className="description">Description: {movie.description}</p>
-        </div>
-      </div>
+      <Card
+        direction={{ base: "column", sm: "row" }}
+        overflow="hidden"
+        variant="outline"
+      >
+        <Image
+          objectFit="cover"
+          maxW={{ base: "100%", sm: "200px" }}
+          src={movie.img}
+          alt={movie.movieName}
+        />
+
+        <Stack>
+          <CardBody>
+            <Heading size="md">{movie.movieName}</Heading>
+            <Text>Status:{movie.status}</Text>
+            <Text py="2">{movie.description}</Text>
+          </CardBody>
+        </Stack>
+      </Card>
       {/* Theatres and Showtimes information */}
       <div className="theatre-list">
         <h3>Theatres showing this movie:</h3>
@@ -75,9 +86,15 @@ const MovieDetail = () => {
               {expandedTheatreId === theatreId && (
                 <div className="showtimes1">
                   {theatreData.showtimes.map((showtime, index) => (
-                    <span key={index} className="showtime">
-                      {showtime.showStartTime}
-                    </span>
+                    <Link
+                      key={index}
+                      to={`/seating/${showtime._id}`}
+                      className="showtime-link"
+                    >
+                      {/* <span>{showtime.showDate}</span> */}
+                      
+                      <span>{showtime.showStartTime}</span>
+                    </Link>
                   ))}
                 </div>
               )}

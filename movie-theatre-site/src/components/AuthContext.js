@@ -22,15 +22,12 @@ export const AuthProvider = ({ children }) => {
                         }
                     });
                     const data = await response.json();
-                    /*console.log("#######start########");
-                    console.log(data);
-                    console.log("#######end########");*/
                     if (response.ok) {
-                        setAuth({ isAuthenticated: true, user: data.user.name, role: data.user.role }); // Assuming 'name' is part of your response
+                        setAuth({ isAuthenticated: true, user: data.user.name, role: data.user.role, id: data.user.id }); // Assuming 'name' is part of your response
                     } else {
                         // Handle error, token might be invalid or expired
                         localStorage.removeItem('token');
-                        setAuth({ isAuthenticated: false, user: null, role: data.user.role });
+                        setAuth({ isAuthenticated: false, user: null, role: data.user.role, id: data.user.id });
                     }
                 } catch (error) {
                     console.error('Error verifying token:', error);
