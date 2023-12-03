@@ -1,20 +1,20 @@
 import React, { useState, useEffect } from "react";
 import { useParams,Link } from "react-router-dom";
 import { Card, Image, Stack, CardBody, Heading, Text } from "@chakra-ui/react";
-
+import { useAuth } from "./AuthContext";
 const MovieDetail = () => {
   const [movie, setMovie] = useState({});
   const [theatreShowtimes, setTheatreShowtimes] = useState({});
   const [expandedTheatreId, setExpandedTheatreId] = useState(null);
   const { movieId } = useParams();
-
+  const { auth } = useAuth();
+  console.log("Auth ID:", auth);
   useEffect(() => {
     const fetchMovieDetails = async () => {
       try {
         const movieResponse = await fetch(`/movies/${movieId}`);
         const movieData = await movieResponse.json();
         setMovie(movieData);
-
         let theatreShowtimesMap = {};
         const theatres = await fetch(`/movies?movieid=${movieId}`);
         const theatresData = await theatres.json();
@@ -34,10 +34,9 @@ const MovieDetail = () => {
         console.error("Error:", error);
       }
     };
-
+    
     fetchMovieDetails();
   }, [movieId]);
-
   const toggleShowtimes = (theatreId) => {
     setExpandedTheatreId(expandedTheatreId === theatreId ? null : theatreId);
   };

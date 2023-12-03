@@ -1,6 +1,7 @@
 import React, { useState, useEffect} from "react";
 import axios from "axios";
 import { useParams, useNavigate } from "react-router-dom";
+import { useAuth } from './AuthContext'; // Import useAuth
 
 const SeatingChart = () => {
   const [seatingLayout, setSeatingLayout] = useState(null);
@@ -10,6 +11,7 @@ const SeatingChart = () => {
   const [movieImage, setMovieImage] = useState("");
   const { showtimeId } = useParams();
   const navigate = useNavigate(); 
+  const { auth } = useAuth()
 
   useEffect(() => {
     const fetchShowtimeDetails = async () => {
@@ -35,19 +37,31 @@ const SeatingChart = () => {
 
     fetchShowtimeDetails();
   }, [showtimeId]);
-
+  console.log(auth?.id);
+  const MAX_SELECTED_SEATS = 8;
   const handleSeatClick = (seatId) => {
     const updatedSelectedSeats = new Set(selectedSeats);
+
+    // Check if the user has already selected the maximum number of seats
+    if (updatedSelectedSeats.size === MAX_SELECTED_SEATS && !updatedSelectedSeats.has(seatId)) {
+      // You can show a message to the user that they can't select more seats
+      alert("You can only select up to 8 seats.");
+      return;
+    }
+
+    // Toggle seat selection
     if (updatedSelectedSeats.has(seatId)) {
       updatedSelectedSeats.delete(seatId);
     } else {
       updatedSelectedSeats.add(seatId);
     }
+
     setSelectedSeats(updatedSelectedSeats);
   };
+  const isPremiumUser = auth?.role === 'premium';
   const handleProceedToPayment = () => {
     const selectedSeatsArray = Array.from(selectedSeats);
-    const serviceFee = 1.5; // Service fee
+    const serviceFee = isPremiumUser ? 0 : 1.5; // Service fee
     const totalCost = (selectedSeatsArray.length * ticketPrice) + serviceFee;
   
     navigate("/payment-overview", { // Ensure this route is correct
@@ -96,13 +110,15 @@ const SeatingChart = () => {
 
   const renderSelectedSeatsSummary = () => {
     const selectedSeatsArray = Array.from(selectedSeats);
-    const totalCost = (selectedSeatsArray.length * ticketPrice)+1.5;
+    const serviceFee = isPremiumUser ? 0 : 1.5;
+    const totalCost = (selectedSeatsArray.length * ticketPrice) + serviceFee;
+  
 
     return (
       <div className="selected-seats-summary">
         <p>Selected Seats: {selectedSeatsArray.join(", ")}</p>
         <p>Total Seats: {selectedSeatsArray.length}</p>
-        <p>Service Fee: $1.50</p>
+        <p>Service Fee: ${serviceFee}</p>
         <p>Total Cost: ${totalCost.toFixed(2)}</p>
       </div>
     );
