@@ -21,6 +21,7 @@ import UpdateTheatre from './components/UpdateTheatre';
 import Screens from './components/Screens';
 import UpdateScreen from './components/UpdateScreen';
 import Analytics from './components/Analytics'
+import UpdateShowtime from './components/UpdateShowtime';
 
 function App() {
   return (
@@ -44,6 +45,7 @@ function App() {
         <Route path="/update-theatre/:id" element={<UpdateTheatre />} />
         <Route path="/screens/:id" element={<Screens />} />
         <Route path="/update-screen/:id" element={<UpdateScreen />} />
+        <Route path="/update-showtime/:id" element={<UpdateShowtime />} />
         <Route path="/analytics" element={<Analytics />} />
       </Routes>
     
