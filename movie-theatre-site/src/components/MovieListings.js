@@ -1,14 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from './AuthContext'; // Import useAuth
-
 const MovieListings = () => {
   const [movies, setMovies] = useState([]);
   const [filteredMovies, setFilteredMovies] = useState([]);
   const [showUpcoming, setShowUpcoming] = useState(false);
   const navigate = useNavigate();
   const { auth } = useAuth(); // Use the hook to access auth state
-
+  
   useEffect(() => {
     fetch("/movies")
       .then((response) => response.json())
