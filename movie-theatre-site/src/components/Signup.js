@@ -2,8 +2,7 @@ import React, { useCallback, useState } from "react";
 
 import axios from "axios";
 
-import Snackbar from "@mui/material/Snackbar";
-import Header from "./Header";
+import { Snackbar } from "@mui/material";
 
 import MuiAlert from "@mui/material/Alert";
 import { useNavigate } from "react-router-dom";
@@ -51,10 +50,7 @@ function Signup() {
     }
   },[memberType,navigate]);
   return (
-    <div>
-      <div>
-        <Header />
-      </div>
+    <>
       <div className="auth-container">
         <h2>Sign Up for Movie Theatre</h2>
         <form onSubmit={onsignup}>
@@ -113,8 +109,24 @@ function Signup() {
           Already have an account? <a href="/login">Login</a>
         </div>
       </div>
-      
-    </div>
+      {/* <Snackbar
+        open={open}
+        autoHideDuration={3000}
+        message={msg.m}
+        transitionDuration={{ enter: 10, exit: 10 }}
+      >
+        <div>
+          <Alert
+            onClose={() => setOpen(false)}
+            severity={msg.t}
+            sx={{ width: "100%" }}
+          >
+            {msg.m}&nbsp;
+            {msg.t === "success" ? "Redirecting to login..." : null}
+          </Alert>
+        </div>
+      </Snackbar> */}
+    </>
   );
 }
 

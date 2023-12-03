@@ -331,6 +331,84 @@ footer {
   border-radius: 5px;
 }
 
+/* Theatres */
+.movie-tile-with-showtimes {
+  display: flex;
+  gap: 16px;
+  padding: 16px;
+  border-radius: 8px;
+  transition: transform 0.2s;
+}
+
+.title {
+  background: none;
+  border: none;
+  width: 100%;
+  padding: 10px;
+  font-size: 30px;
+  text-align: center;
+}
+
+.theatre-tile {
+  display: block;
+  margin-left:auto;
+  margin-right:auto;
+  margin-top: 10px;
+  width: 600px;
+  padding: 16px;
+  font-size: 20px;
+  text-align: center;
+  align-items: center;
+  list-style-type: none;
+  box-shadow: 10px 10px 5px lightgray;
+  border-radius: 10px;
+}
+
+.theatre-tile:hover {
+  background-color: #ffe8e0;
+  transform: scale(1.05);
+}
+
+.show-date {
+  background: none;
+  border: none;
+  text-align: left;
+  width: 100%;
+  padding: 10px;
+  font-size: 18px;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+}
+
+.show-date:hover {
+  background-color: #f0f0f0;
+}
+
+/* Add this to the end of your App.css */
+
+/* Movie Listings Page Styles */
+.admin-controls {
+  display: flex;
+  gap: 8px; /* Space between buttons */
+}
+
+.admin-controls button {
+  padding: 8px 16px;
+  border: none;
+  background-color: #007bff;
+  color: white;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background-color 0.3s;
+}
+
+.admin-controls button:hover {
+  background-color: #0056b3;
+}
+
+/* Update Movie Page Styles */
+/* UpdateMovie.css */
 .update-movie-container {
   max-width: 500px;
   margin: 2rem auto;
@@ -374,4 +452,333 @@ footer {
 
 .update-movie-form .update-movie-btn:hover {
   background-color: #4cae4c;
+}
+
+
+/* Profile Page Styles */
+
+/*.profileContainer {
+  max-width: 600px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.profileDetails {
+  margin-top: 1.5rem;
+}
+
+.profileDetails p {
+  margin-bottom: 1rem;
+}
+
+.profileDetails strong {
+  font-weight: bold;
+}*/
+
+.profile-container {
+  max-width: 600px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.profile-details, .movie-history-list {
+  text-align: left;
+  padding: 0;
+  list-style-type: none;
+}
+
+.profile-details li, .movie-history-list li {
+  background: #f8f8f8;
+  margin-bottom: 1rem;
+  padding: 1rem;
+  border-radius: 4px;
+}
+
+/* Add this if you want a specific font for both sections */
+.profile-details, .movie-history-list {
+  font-family: 'Arial', sans-serif;
+}
+
+/* Membership Options page */
+.membership-title {
+  background: none;
+  border: none;
+  width: 100%;
+  padding: 10px;
+  font-size: 50px;
+  text-align: center;
+}
+
+.regular-membership-tile {
+  display: block;
+  margin-left:auto;
+  margin-right:auto;
+  margin-top: 20px;
+  width: 1000px;
+  text-align: center;
+  list-style-type: none;
+  padding: 30px;
+  background: #f0f0f0;
+  font-size: 20px;
+	border-radius: 30px;
+  box-shadow: 10px 10px 5px lightgray;
+}
+
+.premium-membership-tile {
+  display: block;
+  margin-left:auto;
+  margin-right:auto;
+  margin-top: 20px;
+  width: 1000px;
+  text-align: center;
+  list-style-type: none;
+  padding: 30px;
+  background: #ffe8e0;
+  font-size: 20px;
+	border-radius: 30px;
+  box-shadow: 10px 10px 5px lightgray;
+}
+
+.regular-membership-tile:hover {
+  transform: scale(1.05);
+}
+
+.premium-membership-tile:hover {
+  transform: scale(1.05);
+}
+/* Seating.js*/
+
+/*SeatingChart.js*/
+.seating-chart-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 20px;
+  padding: 20px;
+  border: 1px solid #ddd; /* Optional: adds a border around the seating chart */
+}
+
+.seating-chart {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 20px;
+}
+
+.seat-row {
+  display: flex;
+  justify-content: center;
+  margin: 5px;
+}
+
+.seat {
+  margin: 5px;
+  padding: 8px 15px;
+  background-color: #ddd;
+  border: 1px solid #aaa;
+  cursor: pointer;
+}
+
+.seat.booked {
+  background-color: #666;
+  cursor: not-allowed;
+}
+
+.seat.selected {
+  background-color: #4CAF50;
+}
+
+.proceed-to-payment-button {
+  margin-top: 20px;
+  padding: 10px 20px;
+  background-color: blue;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+/*Payment.js*/
+.payment-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #f4f4f4;
+}
+
+.receipt {
+  width: 80%;
+  max-width: 400px;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #fff;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.receipt h2 {
+  margin-bottom: 20px;
+  color: #333;
+  font-size: 24px;
+}
+
+.receipt-details {
+  text-align: left;
+  line-height: 1.6;
+  border-top: 1px solid #ccc;
+  padding-top: 15px;
+  margin-top: 15px;
+}
+
+.receipt-details p {
+  margin-bottom: 10px;
+  color: #555;
+  font-size: 16px;
+}
+
+.home-button {
+  width: 100%;
+  padding: 10px 0;
+  border: none;
+  border-radius: 4px;
+  background-color: #007bff;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  margin-top: 20px;
+}
+
+.home-button:hover {
+  background-color: #0056b3;
+}
+/* Payment OverView.js*/
+.payment-overview-container {
+  background: #f4f4f4;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  max-width: 600px;
+  margin: 30px auto;
+  text-align: center;
+}
+
+.payment-overview-container h1 {
+  color: #333;
+  font-size: 1.8em;
+  margin-bottom: 10px;
+}
+
+.payment-overview-container img.movie-poster {
+  width: 50%;
+  height: auto;
+  margin: 20px 0;
+  border-radius: 8px;
+}
+
+.payment-overview-container h2 {
+  font-size: 1.5em;
+  margin-bottom: 5px;
+  color: #444;
+}
+
+.payment-overview-container p {
+  font-size: 1.1em;
+  margin-bottom: 15px;
+  color: #666;
+}
+
+.payment-methods {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.payment-methods button {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  margin: 10px 0;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  font-size: 1em;
+  width: 80%;
+  max-width: 300px; /* Ensuring buttons don't get too wide on larger screens */
+}
+
+.payment-methods button:hover {
+  background-color: #0056b3;
+}
+
+.payment-methods button:active {
+  background-color: #003d82;
+}
+
+/*Showtimes.js*/
+
+.showtimes-container {
+  margin: 0 auto;
+  max-width: 800px;
+  padding: 20px;
+  background: #f4f4f4;
+  border-radius: 10px;
+}
+
+.movie-entry {
+  background: white;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  padding: 16px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.movie-title {
+  margin-top: 0;
+  color: #333;
+}
+
+.movie-poster {
+  width: 100%;
+  max-width: 200px;
+  height: auto;
+  margin-bottom: 16px;
+  border-radius: 8px;
+}
+
+.theatre-entry {
+  background: #e9ecef;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  padding: 10px;
+}
+
+.theatre-name {
+  margin-top: 0;
+  color: #495057;
+}
+
+.showtime-list {
+  list-style: none;
+  padding: 0;
+  margin-top: 10px;
+}
+
+.showtime-item {
+  background: #dee2e6;
+  padding: 8px 12px;
+  margin-bottom: 8px;
+  border-radius: 6px;
+  color: #495057;
 }

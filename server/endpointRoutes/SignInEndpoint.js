@@ -1,6 +1,8 @@
 const express = require('express');
 const bcrypt = require('bcryptjs');
-const Members = require('../models/membersModel'); // Make sure to replace this with the correct path
+const jwt = require('jsonwebtoken');
+require('dotenv').config();
+const Members = require('../models/membersModel'); // Ensure this path is correct
 
 const router = express.Router();
 
@@ -20,10 +22,25 @@ router.post('/api/signin', async (req, res) => {
         if (!isMatch) {
             return res.status(401).json({ error: 'Invalid credentials.' });
         }
-
-        // Here you would typically assign a token or create a session
-        // For this example, let's just return a success message
-        res.status(200).json({ message: 'User signed in successfully.' });
+        const token = jwt.sign(
+          {
+            role: user.role,
+            name: user.username, // Change to user.name if you have a name field
+            email: user.email,
+          },
+          "secret", // Ensure you have this environment variable set
+          { expiresIn: "3 days" }
+        );
+        
+        res.status(200).json({
+          id: user._id,
+          role: user.role,
+          name: user.username, // Or user.name
+          email: user.email,
+          token: token, // Do not prepend 'Bearer ' here
+          expiresIn: 168,
+          message: 'User signed in successfully.'
+        });
 
     } catch (err) {
         console.error(err);

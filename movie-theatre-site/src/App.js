@@ -1,12 +1,13 @@
 import React from 'react';
-import './App.css';
-import {Routes,Route} from "react-router-dom";
+import './App.css'
+import { Routes, Route } from 'react-router-dom';
+import { AuthProvider } from './components/AuthContext';
+import Layout from './components/Layout';
 import Dashboard from './components/Dashboard';
 import Home from './components/Home';
 import Login from './components/Login';
 import Signup from './components/Signup';
 import MovieListings from './components/MovieListings';
-import BookTickets from './components/BookTickets';
 import Showtimes from './components/Showtimes';
 import About from './components/About';
 import Contact from './components/Contact';
@@ -22,33 +23,46 @@ import Screens from './components/Screens';
 import UpdateScreen from './components/UpdateScreen';
 import Analytics from './components/Analytics'
 import UpdateShowtime from './components/UpdateShowtime';
+import Profile from './components/profile';
+import TheatreShowings from './components/TheatreShowings';
+import MembershipOptions from './components/MembershipOptions';
+import SeatingChart from './components/SeatingChart';
+import Payment from './components/Payment';
+import PaymentOverview from './components/PaymentOverview';
+import UpdateMovie from './components/UpdateMovie';
 
 function App() {
   return (
+    <AuthProvider>
       <Routes>
-        <Route path='*' element={<Home/>}/>
-        <Route path='/dashboard' element={<Dashboard/>}/>
-        <Route path='/login' element={<Login/>}/>
-        <Route path='/signup' element={<Signup/>}/>
-        <Route path='/theatrelocations' element={ <TheatreLocations/>}/>
-        <Route path='/movielistings' element={<MovieListings/>}/>
-        <Route path='/showtimes' element={<Showtimes/>}/>
-        <Route path='/booktickets' element={<BookTickets/>}/>
-        <Route path='/about' element={<About/>}/>
-        <Route path='/contactus' element={<Contact/>}/>
-        <Route path="/seating-chart/:showtimeId" element={<SeatingChart/>} />
-        <Route path='/movie/:movieId' element={<MovieDetail/>}/>
-        <Route path='/addtheatre' element={<AddTheatre/>} />
-        <Route path='/addscreen' element={<AddScreen/>} />
-        <Route path='/addshowtime' element={<AddShowtime/>} />
-        <Route path='/addmovie' element={<AddMovie/>} />
-        <Route path="/update-theatre/:id" element={<UpdateTheatre />} />
-        <Route path="/screens/:id" element={<Screens />} />
-        <Route path="/update-screen/:id" element={<UpdateScreen />} />
-        <Route path="/update-showtime/:id" element={<UpdateShowtime />} />
-        <Route path="/analytics" element={<Analytics />} />
+        <Route path='*' element={<Layout><Home/></Layout>}/>
+        <Route path='/dashboard' element={<Layout><Dashboard/></Layout>}/>
+        <Route path='/login' element={<Layout><Login/></Layout>}/>
+        <Route path='/signup' element={<Layout><SignUp/></Layout>}/>
+        <Route path='/theatrelocations' element={<Layout><TheatreLocations/></Layout>}/>
+        <Route path='/movielistings' element={<Layout><MovieListings/></Layout>}/>
+        <Route path='/showtimes' element={<Layout><Showtimes/></Layout>}/>
+        <Route path='/about' element={<Layout><About/></Layout>}/>
+        <Route path='/contactus' element={<Layout><Contact/></Layout>}/>
+        <Route path='/seating/:showtimeId' element={<Layout><SeatingChart/></Layout>}/>
+        <Route path='/movie/:movieId' element={<Layout><MovieDetail/></Layout>}/>
+        <Route path='/theatrelocations/:theatreId' element={<Layout><TheatreShowings/></Layout>}/>
+        <Route path="/update-movie/:id" element={<Layout><UpdateMovie /></Layout>} />
+        <Route path="/profile" element={<Layout><Profile /></Layout>} />
+        <Route path='/memberships' element={<Layout><MembershipOptions/></Layout>}/>
+        <Route path="/payment" element={<Layout><Payment /></Layout>} />
+        <Route path='/payment-overview' element={<Layout><PaymentOverview/></Layout>}/>
+        <Route path="/update-screen/:id" element={<Layout><UpdateScreen /></Layout>} />
+        <Route path="/update-showtime/:id" element={<Layout><UpdateShowtime /></Layout>} />
+        <Route path="/analytics" element={<Layout><Analytics /></Layout>} />
+        <Route path='/addtheatre' element={<Layout><AddTheatre/></Layout>} />
+        <Route path='/addscreen' element={<Layout><AddScreen/></Layout>} />
+        <Route path='/addshowtime' element={<Layout><AddShowtime/></Layout>} />
+        <Route path='/addmovie' element={<Layout><AddMovie/></Layout>} />
+        <Route path="/update-theatre/:id" element={<Layout><UpdateTheatre /></Layout>} />
+        <Route path="/screens/:id" element={<Layout><Screens /></Layout>} />
       </Routes>
-    
+    </AuthProvider>
   );
 }
 

@@ -1,27 +1,43 @@
-// Header.js
 import React from "react";
-/*import { useNavigate } from "react-router-dom";*/
-/*import { Link } from "react-router-dom";*/
-
+import { useAuth } from './AuthContext';
+import { useNavigate, Link } from 'react-router-dom'; // Import Link
 
 const Header = () => {
+  const { auth, setAuth } = useAuth();
+  const navigate = useNavigate();
+
+  const handleSignOut = () => {
+    setAuth({ isAuthenticated: false, user: null });
+    localStorage.removeItem('token');
+    navigate('/login');
+  };
 
   return (
     <header>
       <div className="mainHeaderDiv">
         <nav>
           <ul>
-          <a href="/" className="link">Home</a>
-          <a href="/movielistings" className="link">Movies</a>
-          <a href="/about" className="link">About</a>
-          <a href="/contactus" className="link">Contact</a>
+            <Link to="/" className="link">Home</Link>
+            <Link to="/movielistings" className="link">Movies</Link>
+            <Link to="/about" className="link">About</Link>
+            <Link to="/contactus" className="link">Contact</Link>
           </ul>
-          
         </nav>
         <div className="sign">
-          <a href="/login" className="link"> Sign In</a><a href="/signup" className="link">Sign Up </a>
+          {auth.isAuthenticated ? (
+            <>
+              <span>Welcome, {auth.user}</span> {/* Adjust if auth.user is an object */}
+              <button onClick={handleSignOut} className="link">Sign Out</button>
+              {/* Add My Profile button */}
+              {auth.role !== 'admin' && <Link to="/profile" className="link">My Profile</Link>}
+            </>
+          ) : (
+            <>
+              <Link to="/login" className="link">Sign In</Link>
+              <Link to="/signup" className="link">Sign Up</Link>
+            </>
+          )}
         </div>
-
       </div>
     </header>
   );

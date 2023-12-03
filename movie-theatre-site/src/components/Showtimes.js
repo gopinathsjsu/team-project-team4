@@ -95,7 +95,7 @@ const Showtimes = () => {
                 <h3 className="theatre-name">{theatre.theatreName}</h3>
                 <ul className="showtime-list">
                   {theatre.showtimes.map((showtime) => {
-                    const { formattedDate } = formatDateAndTime(
+                    const { formattedDate} = formatDateAndTime(
                       showtime.showDate
                     );
                     return (

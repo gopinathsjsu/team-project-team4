@@ -1,29 +1,32 @@
 import React, { useState } from 'react';
-import Header from './Header';
+import { useNavigate } from 'react-router-dom';
+import { useAuth } from './AuthContext';
+//import Header from './Header';
 
 function Login() {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+    const navigate = useNavigate();
+    const { setAuth } = useAuth();
 
     const handleLogin = async (event) => {
-        event.preventDefault(); // Prevents the default form submission behavior
+        event.preventDefault();
 
         try {
-            const response = await fetch('/api/login', {
+            const response = await fetch('/api/signin', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({ username, password }),
             });
-
+            const data = await response.json();
             if (response.ok) {
-                // Handle successful login here
-                console.log('Logged in successfully');
-                // Redirect or update state
+                setAuth({ isAuthenticated: true, user: data.name, role: data.role, id: data.id });
+                localStorage.setItem('token', data.token);
+                navigate('/Home'); // Ensure this is the correct route you have in your <Routes> setup
             } else {
-                // Handle errors or unsuccessful login attempts
-                console.error('Failed to login');
+                console.error('Failed to login:', data.error);
             }
         } catch (error) {
             console.error('There was an error logging in:', error);
@@ -32,7 +35,7 @@ function Login() {
 
     return (
         <>
-            <Header />
+            {/* <Header /> */}
             <div className="auth-container">
                 <h2>Login to Movie Theatre</h2>
                 <form onSubmit={handleLogin}>
