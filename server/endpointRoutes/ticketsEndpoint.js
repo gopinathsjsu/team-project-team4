@@ -28,7 +28,8 @@ router.get('/tickets/:id', async (request, response) => {
 
 router.post('/tickets', async (request, response) => {
     try {
-        if (!request.body.seatsBooked || !request.body.showid) {
+
+        if (!request.body.memberid || !request.body.seatsBooked || !request.body.showid ||  request.body.isPaymentViaRewards === undefined || typeof request.body.isPaymentViaRewards !== 'boolean') {
             return response.status(400).send({
                 message: 'Send all required fields'
             });
@@ -36,7 +37,8 @@ router.post('/tickets', async (request, response) => {
         const newTicket = {
             memberid: request.body.memberid,
             seatsBooked: request.body.seatsBooked,
-            showid: request.body.showid
+            showid: request.body.showid,
+            isPaymentViaRewards: request.body.isPaymentViaRewards
         };
 
         const show = await Showtimes.findById(request.body.showid);
@@ -52,9 +54,15 @@ router.post('/tickets', async (request, response) => {
 
         // Calculate the new rewards
         const n = request.body.seatsBooked.length;
-        const newRewards = n * show.price;
+        let newRewards = request.body.memberid;
+        if(!request.body.isPaymentViaRewards)
+        {
+            newRewards = n * show.price;
+        }
+        
 
         // Update the showtimes and member in parallel
+        if(!request.body.isPaymentViaRewards){
         await Promise.all([
             Showtimes.findByIdAndUpdate(request.body.showid, updatedShow),
             Members.findByIdAndUpdate(request.body.memberid, {
@@ -62,11 +70,21 @@ router.post('/tickets', async (request, response) => {
                 $push: { movieHistory: { date: currentDate, movieName: movieName } }
             })
         ]);
+    }
+    else{
+        await Promise.all([
+            Showtimes.findByIdAndUpdate(request.body.showid, updatedShow),
+            Members.findByIdAndUpdate(request.body.memberid, {
+                $push: { movieHistory: { date: currentDate, movieName: movieName } }
+            })
+        ]);
+    }
 
         const ticket = await Tickets.create(newTicket);
         return response.status(200).json(ticket);
     } catch (error) {
         console.log(error.message);
+        console.error(error.stack)
         response.status(500).send({ message: error.message });
     }
 });
@@ -111,16 +129,29 @@ router.delete('/tickets/:id', async (request, response) => {
         // Update the showtimes by removing the booked seats
         const updatedSeats = show.seats_booked.filter(seat => !ticket.seatsBooked.includes(seat));
         await Showtimes.findByIdAndUpdate(ticket.showid, { seats_booked: updatedSeats });
-
-        // Update member's rewards and movie history
+           // Update member's rewards and movie history
         const member = await Members.findById(ticket.memberid);
-        if (member) {
-            member.rewards -= ticket.seatsBooked.length * show.price;
-            const updatedMovieHistory = member.movieHistory.filter((history, index, self) =>
-                !(history.movieName === movieNameToDelete && index === self.findIndex(h => h.movieName === movieNameToDelete))
-            );
-            member.movieHistory = updatedMovieHistory;
-            await member.save();
+        if(!ticket.isPaymentViaRewards)
+        {
+            if (member) {
+                member.rewards -= ticket.seatsBooked.length * show.price;
+                const updatedMovieHistory = member.movieHistory.filter((history, index, self) =>
+                    !(history.movieName === movieNameToDelete && index === self.findIndex(h => h.movieName === movieNameToDelete))
+                );
+                member.movieHistory = updatedMovieHistory;
+                await member.save();
+            }
+
+        }
+        else
+        {
+            if (member) {
+                const updatedMovieHistory = member.movieHistory.filter((history, index, self) =>
+                    !(history.movieName === movieNameToDelete && index === self.findIndex(h => h.movieName === movieNameToDelete))
+                );
+                member.movieHistory = updatedMovieHistory;
+                await member.save();
+            }
         }
 
         // Delete the ticket
