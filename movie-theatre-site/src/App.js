@@ -21,7 +21,7 @@ import TheatreLocations from './components/TheatreLocations';
 import UpdateTheatre from './components/UpdateTheatre';
 import Screens from './components/Screens';
 import UpdateScreen from './components/UpdateScreen';
-import Analytics from './components/Analytics'
+import MovieAnalytics from './components/MovieAnalytics'
 import UpdateShowtime from './components/UpdateShowtime';
 import Profile from './components/profile';
 import TheatreShowings from './components/TheatreShowings';
@@ -53,7 +53,7 @@ function App() {
         <Route path='/payment-overview' element={<Layout><PaymentOverview/></Layout>}/>
         <Route path="/update-screen/:id" element={<UpdateScreen />} />
         <Route path="/update-showtime/:id" element={<UpdateShowtime />} />
-        <Route path="/analytics" element={<Analytics />} />
+        <Route path="/movie-analytics" element={<MovieAnalytics />} />
         <Route path='/addtheatre' element={<AddTheatre/>} />
         <Route path='/addscreen' element={<AddScreen/>} />
         <Route path='/addshowtime' element={<AddShowtime/>} />

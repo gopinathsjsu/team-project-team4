@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from './AuthContext';
 
 const TheatreLocations = () => {
   const [theatres, setTheatres] = useState([]);
   const navigate = useNavigate();
-
+  const { auth } = useAuth();
 
   useEffect(() => {
     fetch("/theatres")
@@ -52,9 +53,13 @@ const TheatreLocations = () => {
               <Link to={`/theatrelocations/${location._id}`}>
                 {location.theatreName} - <i>{location.city}</i>
               </Link>
+              {auth.isAuthenticated && auth.role === 'admin' && (
+              <div className="admin-controls">
               <button onClick={() => handleShowScreens(location._id)}>Show Screens</button>
               <button onClick={() => handleUpdate(location._id)}>Update</button>
               <button onClick={() => handleDelete(location._id)}>Delete</button>
+              </div>
+              )}
             </li>
           </div>
         ))}
