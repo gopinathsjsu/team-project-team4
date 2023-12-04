@@ -38,16 +38,28 @@ const PaymentOverview = () => {
   const handlePaymentSubmission = async (paymentMethod) => {
     try {
       console.log("****In payment****");
-      console.log(auth?.id);
+      console.log(auth.id);
       // Assuming that the API call is only required for 'money' payment method
       if (paymentMethod === 'money') {
-        const ticketData = {
-          seatsBooked: selectedSeats,
-          showid: showtimeId,
-          memberid: auth?.id,
-        };
-
-        await axios.post('/tickets', ticketData);
+        if(auth.id)
+        {
+          const ticketData = {
+            seatsBooked: selectedSeats,
+            showid: showtimeId,
+            memberid: auth.id,
+          };
+  
+          await axios.post('/tickets', ticketData);
+        }
+        else{
+          const ticketData = {
+            seatsBooked: selectedSeats,
+            showid: showtimeId
+          };
+  
+          await axios.post('/tickets', ticketData);
+        }
+        
       }
 
       // Navigate to Payment page with all necessary details
