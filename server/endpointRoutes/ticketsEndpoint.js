@@ -142,6 +142,7 @@ router.delete('/tickets/:id', async (request, response) => {
         else
         {
             if (member) {
+                member.rewards += ticket.seatsBooked.length * show.price;
                 const updatedMovieHistory = member.movieHistory.filter((history, index, self) =>
                     !(history.movieName === movieNameToDelete && index === self.findIndex(h => h.movieName === movieNameToDelete))
                 );
