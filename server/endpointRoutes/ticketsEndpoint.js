@@ -55,12 +55,8 @@ router.post('/tickets', async (request, response) => {
         // Calculate the new rewards
         const n = request.body.seatsBooked.length;
         let newRewards = request.body.memberid;
-        if(!request.body.isPaymentViaRewards)
-        {
-            newRewards = n * show.price;
-        }
+        newRewards = n * show.price;
         
-
         // Update the showtimes and member in parallel
         if(!request.body.isPaymentViaRewards){
         await Promise.all([
@@ -75,6 +71,7 @@ router.post('/tickets', async (request, response) => {
         await Promise.all([
             Showtimes.findByIdAndUpdate(request.body.showid, updatedShow),
             Members.findByIdAndUpdate(request.body.memberid, {
+                $inc: { rewards: -newRewards },
                 $push: { movieHistory: { date: currentDate, movieName: movieName } }
             })
         ]);
@@ -141,7 +138,6 @@ router.delete('/tickets/:id', async (request, response) => {
                 member.movieHistory = updatedMovieHistory;
                 await member.save();
             }
-
         }
         else
         {
