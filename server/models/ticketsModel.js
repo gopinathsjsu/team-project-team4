@@ -20,6 +20,11 @@ const ticketsSchema = new mongoose.Schema(
         seatsBooked : {
             type : Array,
             required : true
+        },
+
+        isPaymentViaRewards: {
+            type : Boolean,
+            required : true
         }
     }
 )
