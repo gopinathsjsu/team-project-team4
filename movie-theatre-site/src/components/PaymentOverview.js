@@ -55,64 +55,58 @@ const PaymentOverview = () => {
     }
   }, [auth?.id]);
 
-  // Function to handle payment submission
-  const handlePaymentSubmission = async (paymentMethod) => {
-    try {
-      console.log("****In payment****");
-      console.log(auth?.id);
+// Function to handle payment submission
+const handlePaymentSubmission = async (paymentMethod) => {
+  try {
+    console.log("****In payment****");
+    console.log(auth?.id);
 
-      // Prepare ticket data
-      let ticketData = {
-        seatsBooked: selectedSeats,
-        showid: showtimeId
-      };
+    // Prepare ticket data
+    let ticketData = {
+      showid: showtimeId,
+      isPaymentViaRewards: false, // Default to false
+    };
 
-      // Include memberid only if the user is authenticated
-      if (auth?.id) {
-        ticketData.memberid = auth?.id;
-      }
-
-      // Check if payment is done with reward points
-      if (paymentMethod === 'rewardPoints') {
-        if (rewardPoints >= totalCost) {
-          // Sufficient reward points, proceed with payment
-          // You can deduct reward points here if needed
-          // For now, deducting reward points from totalCost
-          const remainingPoints = rewardPoints - totalCost;
-          navigate('/payment', {
-            state: {
-              movieTitle,
-              selectedSeats,
-              totalCost: 0, // Total cost becomes 0 as it's covered by reward points
-              paymentMethod,
-              theaterDetails,
-              remainingPoints, // Send remaining reward points to payment page
-            },
-          });
-        } else {
-          // Insufficient reward points, show alert
-          alert("You don't have enough reward points. Please pay with money.");
-        }
-      } else if (paymentMethod === 'money') {
-        // Submit ticket data if 'money' payment method is selected
-        await axios.post('/tickets', ticketData);
-
-        // Navigate to Payment page with all necessary details, including theater details
-        navigate('/payment', {
-          state: {
-            movieTitle,
-            selectedSeats,
-            totalCost,
-            paymentMethod,
-            theaterDetails,
-          },
-        });
-      }
-    } catch (error) {
-      console.error('Error during payment submission:', error);
-      // Handle error appropriately
+    // Include memberid only if the user is authenticated
+    if (auth?.id) {
+      ticketData.memberid = auth?.id;
     }
-  };
+
+    // Check if payment is done with reward points
+    if (paymentMethod === 'rewardPoints') {
+      if (rewardPoints >= totalCost) {
+        // Sufficient reward points, proceed with payment
+        // You can deduct reward points here if needed
+        // For now, deducting reward points from totalCost
+        ticketData.isPaymentViaRewards = true;
+      } else {
+        // Insufficient reward points, show alert
+        alert("You don't have enough reward points. Please pay with cash.");
+        return; // Stop execution to prevent further processing
+      }
+    }
+
+    // Include selected seats in the ticket data
+    ticketData.seatsBooked = selectedSeats;
+
+    // Submit ticket data
+    await axios.post('/tickets', ticketData);
+
+    // Navigate to Payment page with all necessary details, including theater details
+    navigate('/payment', {
+      state: {
+        movieTitle,
+        selectedSeats,
+        totalCost: ticketData.isPaymentViaRewards ? 0 : totalCost, // Set totalCost to 0 if payment is via rewards
+        paymentMethod,
+        theaterDetails,
+      },
+    });
+  } catch (error) {
+    console.error('Error during payment submission:', error);
+    // Handle error appropriately
+  }
+};
 
   return (
     <div className="payment-overview-container">
