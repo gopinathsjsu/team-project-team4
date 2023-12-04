@@ -28,7 +28,7 @@ router.get('/tickets/:id', async (request, response) => {
 
 router.post('/tickets', async (request, response) => {
     try {
-        if (!request.body.memberid || !request.body.seatsBooked || !request.body.showid) {
+        if (!request.body.seatsBooked || !request.body.showid) {
             return response.status(400).send({
                 message: 'Send all required fields'
             });

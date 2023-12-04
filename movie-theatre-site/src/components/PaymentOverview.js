@@ -11,6 +11,8 @@ const PaymentOverview = () => {
 
   // State to store theater details
   const [theaterDetails, setTheaterDetails] = useState({});
+  // State to store user's reward points
+  const [rewardPoints, setRewardPoints] = useState(0);
 
   // Fetch theater details
   useEffect(() => {
@@ -32,46 +34,80 @@ const PaymentOverview = () => {
     };
 
     fetchTheaterDetails();
-  },[showtimeId]);
+  }, [showtimeId]);
+
+  // Fetch user's reward points
+  useEffect(() => {
+    const fetchRewardPoints = async () => {
+      try {
+        // Replace with the actual API endpoint to fetch user's profile
+        const profileResponse = await axios.get(`/member/${auth?.id}/profile`);
+        const rewardPoints = profileResponse.data?.rewards || 0;
+        setRewardPoints(rewardPoints);
+      } catch (error) {
+        console.error('Error fetching reward points:', error);
+      }
+    };
+  
+    // Fetch reward points only if the user is authenticated
+    if (auth?.id) {
+      fetchRewardPoints();
+    }
+  }, [auth?.id]);
 
   // Function to handle payment submission
   const handlePaymentSubmission = async (paymentMethod) => {
     try {
       console.log("****In payment****");
-      console.log(auth.id);
-      // Assuming that the API call is only required for 'money' payment method
-      if (paymentMethod === 'money') {
-        if(auth.id)
-        {
-          const ticketData = {
-            seatsBooked: selectedSeats,
-            showid: showtimeId,
-            memberid: auth.id,
-          };
-  
-          await axios.post('/tickets', ticketData);
-        }
-        else{
-          const ticketData = {
-            seatsBooked: selectedSeats,
-            showid: showtimeId
-          };
-  
-          await axios.post('/tickets', ticketData);
-        }
-        
+      console.log(auth?.id);
+
+      // Prepare ticket data
+      let ticketData = {
+        seatsBooked: selectedSeats,
+        showid: showtimeId
+      };
+
+      // Include memberid only if the user is authenticated
+      if (auth?.id) {
+        ticketData.memberid = auth?.id;
       }
 
-      // Navigate to Payment page with all necessary details
-      navigate('/payment', {
-        state: {
-          movieTitle,
-          selectedSeats,
-          totalCost,
-          paymentMethod,
-          ...theaterDetails, // Include theater details in the state
-        },
-      });
+      // Check if payment is done with reward points
+      if (paymentMethod === 'rewardPoints') {
+        if (rewardPoints >= totalCost) {
+          // Sufficient reward points, proceed with payment
+          // You can deduct reward points here if needed
+          // For now, deducting reward points from totalCost
+          const remainingPoints = rewardPoints - totalCost;
+          navigate('/payment', {
+            state: {
+              movieTitle,
+              selectedSeats,
+              totalCost: 0, // Total cost becomes 0 as it's covered by reward points
+              paymentMethod,
+              theaterDetails,
+              remainingPoints, // Send remaining reward points to payment page
+            },
+          });
+        } else {
+          // Insufficient reward points, show alert
+          alert("You don't have enough reward points. Please pay with money.");
+        }
+      } else if (paymentMethod === 'money') {
+        // Submit ticket data if 'money' payment method is selected
+        await axios.post('/tickets', ticketData);
+
+        // Navigate to Payment page with all necessary details, including theater details
+        navigate('/payment', {
+          state: {
+            movieTitle,
+            selectedSeats,
+            totalCost,
+            paymentMethod,
+            theaterDetails,
+          },
+        });
+      }
     } catch (error) {
       console.error('Error during payment submission:', error);
       // Handle error appropriately
@@ -87,6 +123,7 @@ const PaymentOverview = () => {
       <p>Total Cost: ${totalCost}</p>
       <p>Theater: {theaterDetails.theaterName}</p>
       <p>Screen Number: {theaterDetails.screenNumber}</p>
+      <p>Reward Points: {rewardPoints}</p>
 
       <div className="payment-methods">
         <button onClick={() => handlePaymentSubmission('rewardPoints')}>Pay with Reward Points</button>

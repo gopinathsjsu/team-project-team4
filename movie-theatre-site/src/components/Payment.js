@@ -5,8 +5,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 const Payment = () => {
   const location = useLocation();
   const navigate = useNavigate();
-  const { totalCost, numberOfSeats, selectedSeats, movieTitle } = location.state || {};
-
+  const { totalCost, selectedSeats, movieTitle, theaterDetails } = location.state || {};
 
   // Handling the case where no booking data is passed to the component
   if (!location.state) {
@@ -19,7 +18,9 @@ const Payment = () => {
         <h2>Thank You for Booking!</h2>
         <div className="receipt-details">
           <p><strong>Movie Title:</strong> {movieTitle}</p>
-          <p><strong>Number of Seats:</strong> {numberOfSeats}</p>
+          <p><strong>Theater:</strong> {theaterDetails.theaterName}</p>
+          <p><strong>Screen Number:</strong> {theaterDetails.screenNumber}</p>
+          <p><strong>Number of Seats:</strong> {selectedSeats.length}</p>
           <p><strong>Seats:</strong> {selectedSeats.join(', ')}</p>
           <p><strong>Total Cost:</strong> ${totalCost.toFixed(2)}</p>
         </div>
@@ -28,5 +29,6 @@ const Payment = () => {
     </div>
   );
 };
+
 
 export default Payment;

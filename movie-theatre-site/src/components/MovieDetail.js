@@ -9,6 +9,7 @@ const MovieDetail = () => {
   const { movieId } = useParams();
   const { auth } = useAuth();
   console.log("Auth ID:", auth);
+  console.log("***********",auth)
   useEffect(() => {
     const fetchMovieDetails = async () => {
       try {

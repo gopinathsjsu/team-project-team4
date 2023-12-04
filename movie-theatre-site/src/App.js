@@ -15,7 +15,6 @@ import MovieDetail from './components/MovieDetail';
 import TheatreLocations from './components/TheatreLocations';
 import TheatreShowings from './components/TheatreShowings';
 import UpdateMovie from './components/UpdateMovie';
-import Profile from './components/profile';
 import MembershipOptions from './components/MembershipOptions';
 import SeatingChart from './components/SeatingChart';
 import Payment from './components/Payment';
