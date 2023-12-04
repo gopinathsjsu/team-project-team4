@@ -17,7 +17,6 @@ function Signup() {
   const [msg, setMsg] = useState({ m: "", t: "" });
 
   const navigate = useNavigate();
-  console.log(memberType);
 
   const registerApi = (body) => {
     return axios.post("/api/register", body, {
@@ -49,7 +48,7 @@ function Signup() {
       setMsg({ m: e.response.data.error, t: "error" });
       setOpen(true);
     }
-  }, []);
+  },[memberType,navigate]);
   return (
     <>
       <div className="auth-container">
