@@ -832,3 +832,24 @@ footer {
 .profile-details, .movie-history-list {
   font-family: 'Arial', sans-serif;
 }
+
+/* Contact and About.js*/
+.container {
+  font-family: 'Arial', sans-serif; /* Replace 'Arial' with your desired font */
+}
+
+/* AboutPage specific styles */
+.about-page h1,
+.about-page h2,
+.about-page p,
+.about-page ul,
+.about-page li {
+  color: #333; /* Text color for AboutPage */
+}
+
+/* ContactUsPage specific styles */
+.contact-us-page h1,
+.contact-us-page h2,
+.contact-us-page p {
+  color: #333; /* Text color for ContactUsPage */
+}

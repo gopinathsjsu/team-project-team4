@@ -54,12 +54,9 @@ const PaymentOverview = () => {
       fetchRewardPoints();
     }
   }, [auth?.id]);
-
 // Function to handle payment submission
 const handlePaymentSubmission = async (paymentMethod) => {
   try {
-    console.log("****In payment****");
-    console.log(auth?.id);
 
     // Prepare ticket data
     let ticketData = {
