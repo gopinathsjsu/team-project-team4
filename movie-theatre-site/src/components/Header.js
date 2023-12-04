@@ -21,6 +21,15 @@ const Header = () => {
             <Link to="/movielistings" className="link">Movies</Link>
             <Link to="/about" className="link">About</Link>
             <Link to="/contactus" className="link">Contact</Link>
+            {auth.isAuthenticated && auth.role === 'admin' && (
+              <>
+                <Link to="/movie-analytics" className="link">Movie Analytics</Link>
+                <Link to="/addmovie" className="link">Add Movie</Link>
+                <Link to="/addtheatre" className="link">Add Theatre</Link>
+                <Link to="/addscreen" className="link">Add Screen</Link>
+                <Link to="/addshowtime" className="link">Add Showtime</Link>
+              </>
+            )}
           </ul>
         </nav>
         <div className="sign">

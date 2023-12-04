@@ -266,6 +266,22 @@ footer {
   background-color: #0f0;
 }
 
+.admin-controls button {
+  padding: 8px 8px;
+  border: 8px;
+  background-color: #007bff;
+  margin: 4px;
+  color: white;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background-color 0.3s;
+}
+
+.admin-controls button:hover {
+  background-color: #0056b3;
+}
+
+
 /*MovieDetails.js*/
 
 .theatre-list {

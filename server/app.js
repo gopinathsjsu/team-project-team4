@@ -17,6 +17,7 @@ const screensRoutes = require('./endpointRoutes/screensEndpoint');
 const showtimesRoutes = require('./endpointRoutes/showtimesEndpoint');
 const ticketsRoutes = require('./endpointRoutes/ticketsEndpoint');
 const signInRoutes = require('./endpointRoutes/SignInEndpoint');
+const analyticsRoutes = require('./endpointRoutes/analyticsEndpoint');
 const verifyTokenRoutes = require('./endpointRoutes/verifyTokenEndpoint');
 const memberRoutes = require('./endpointRoutes/memberEndpoint');
 
@@ -38,6 +39,8 @@ app.use(screensRoutes);
 app.use(showtimesRoutes);
 app.use(ticketsRoutes);
 app.use(signInRoutes);
+app.use(analyticsRoutes);
+
 app.use(verifyTokenRoutes);
 app.use(memberRoutes);
 module.exports = app;
