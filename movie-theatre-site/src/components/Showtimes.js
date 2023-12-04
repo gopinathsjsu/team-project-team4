@@ -1,17 +1,21 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+
+
 
 const Showtimes = () => {
   const [moviesWithShowtimes, setMoviesWithShowtimes] = useState([]);
+  const [isLoading, setIsLoading] = useState(true); // New state for tracking loading
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchMoviesAndShowtimes = async () => {
       try {
+        setIsLoading(true); // Start loading
         // Fetch all movies
         const moviesResponse = await axios.get("/movies");
         const movies = moviesResponse.data;
-
         // Parallelize fetching theaters and showtimes for each movie
         const moviesPromises = movies.map(async (movie) => {
           const theatresResponse = await axios.get(
@@ -35,6 +39,8 @@ const Showtimes = () => {
         setMoviesWithShowtimes(combinedData);
       } catch (error) {
         console.error("Error fetching movies and showtimes:", error);
+      } finally {
+        setIsLoading(false); // Stop loading once data is fetched or an error occurs
       }
     };
 
@@ -42,9 +48,37 @@ const Showtimes = () => {
   }, []);
   const formatDateAndTime = (isoString) => {
     const date = new Date(isoString);
-    const formattedDate = date.toLocaleDateString(); // formats date
+    const formattedDate = date.toISOString().slice(0, 10); // formats date
     return { formattedDate };
   };
+
+  if (isLoading) {
+    return <div style={{ textAlign: 'center', marginTop: '20px' }}>Loading...</div>;
+  }
+
+  const handleDelete = async (showId) => {
+    if (window.confirm("Are you sure you want to delete this showtime?")) {
+      try {
+        const response = await fetch(`/showtimes/${showId}`, {
+          method: 'DELETE',
+        });
+        if (response.ok) {
+          window.location.reload();
+        } else {
+          const data = await response.json();
+          alert(data.message);
+        }
+      } catch (error) {
+        console.error("There was an error deleting the movie:", error);
+        alert("There was an error deleting the movie.");
+      }
+    }
+  };
+
+  const handleUpdate = (showId) => {
+    navigate(`/update-showtime/${showId}`);
+  };
+
 
   return (
     <>
@@ -70,8 +104,12 @@ const Showtimes = () => {
                       <li key={showtime._id} className="showtime-item">
                         <Link to={`/seating/${showtime._id}`}>
                           {formattedDate} at
-                            {showtime.showStartTime}
+                          {showtime.showStartTime}
                         </Link>
+                        <div className="admin-controls">
+                          <button onClick={() => handleUpdate(showtime._id)}>Update</button>
+                          <button onClick={() => handleDelete(showtime._id)}>Delete</button>
+                        </div>
                       </li>
                     );
                   })}
