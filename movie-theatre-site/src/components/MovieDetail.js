@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { useParams,Link } from "react-router-dom";
 import { Card, Image, Stack, CardBody, Heading, Text } from "@chakra-ui/react";
 
@@ -6,6 +6,7 @@ const MovieDetail = () => {
   const [movie, setMovie] = useState({});
   const [allShowtimes, setAllShowtimes] = useState({});
   const [theatreShowtimes, setTheatreShowtimes] = useState({});
+  const [expandedTheatreId, setExpandedTheatreId] = useState(null);
   const [clonedData, setClonedData] = useState({});
   const { movieId } = useParams();
 
@@ -36,6 +37,10 @@ const MovieDetail = () => {
     setTheatreShowtimes(clonedData);
 
 });
+
+const toggleShowtimes = (theatreId) => {
+  setExpandedTheatreId(expandedTheatreId === theatreId ? null : theatreId);
+};
 
   useEffect(() => {
     const fetchMovieDetails = async () => {
