@@ -8,8 +8,7 @@ const ticketsSchema = new mongoose.Schema(
     {
         memberid : {
             type : Schema.Types.ObjectId,
-            ref : Members,
-            required : true
+            ref : Members
         },
 
         showid : {

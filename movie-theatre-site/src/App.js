@@ -18,17 +18,17 @@ import AddScreen from './components/AddScreen';
 import AddShowtime from './components/AddShowtime';
 import AddMovie from './components/AddMovie';
 import TheatreLocations from './components/TheatreLocations';
+import TheatreShowings from './components/TheatreShowings';
+import UpdateMovie from './components/UpdateMovie';
 import UpdateTheatre from './components/UpdateTheatre';
 import Screens from './components/Screens';
 import UpdateScreen from './components/UpdateScreen';
 import MovieAnalytics from './components/MovieAnalytics'
 import UpdateShowtime from './components/UpdateShowtime';
-import Profile from './components/profile';
-import TheatreShowings from './components/TheatreShowings';
 import MembershipOptions from './components/MembershipOptions';
 import Payment from './components/Payment';
 import PaymentOverview from './components/PaymentOverview';
-import UpdateMovie from './components/UpdateMovie';
+import Profile from './components/profile';
 
 function App() {
   return (
