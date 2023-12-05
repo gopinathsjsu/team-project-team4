@@ -59,8 +59,12 @@ const Showtimes = () => {
   const handleDelete = async (showId) => {
     if (window.confirm("Are you sure you want to delete this showtime?")) {
       try {
+        const token = localStorage.getItem('token');
         const response = await fetch(`/showtimes/${showId}`, {
           method: 'DELETE',
+          headers: {
+            'Authorization': `Bearer ${token}`
+          },
         });
         if (response.ok) {
           window.location.reload();

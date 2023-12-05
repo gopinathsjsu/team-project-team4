@@ -12,10 +12,14 @@ function AddMovie() {
     const [msg, setMsg] = useState({ m: "", t: "" });
 
     const navigate = useNavigate();
-
+    const token = localStorage.getItem('token');
     const registerApi = (body) => {
         return axios.post("/movies", body, {
         baseURL: "http://localhost:3000",
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+          },
         });
     };
 

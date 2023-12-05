@@ -30,8 +30,12 @@ const ScreenListings = () => {
   const handleDelete = async (screenId) => {
     if (window.confirm("Are you sure you want to delete this movie?")) {
         try {
+          const token = localStorage.getItem('token');
           const response = await fetch(`/screens/${screenId}`, {
             method: 'DELETE',
+            headers: {
+              'Authorization': `Bearer ${token}`
+            },
           });
           if (response.ok) {
             setScreens(screens.filter((screen) => screen._id !== screenId));

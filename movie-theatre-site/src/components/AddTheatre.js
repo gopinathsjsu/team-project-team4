@@ -10,10 +10,14 @@ function AddTheatre () {
     const [msg, setMsg] = useState({ m: "", t: "" });
 
     const navigate = useNavigate();
-
+    const token = localStorage.getItem('token');
     const registerApi = (body) => {
         return axios.post("/theatres", body, {
         baseURL: "http://localhost:3000",
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+          },
         });
     };
 
@@ -27,7 +31,6 @@ function AddTheatre () {
 
         try {
             const res = await registerApi(body);
-            console.log(res);
             setMsg({ m: res.data.message, t: "success" });
             setOpen(true);
             alert("Theatre added successfully");

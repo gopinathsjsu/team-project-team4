@@ -23,10 +23,15 @@ function AddScreen() {
     const [open, setOpen] = useState(false);
     const [msg, setMsg] = useState({ m: "", t: "" });
 
+    const token = localStorage.getItem('token');
 
     const registerApi = (body) => {
         return axios.post("/screens", body, {
         baseURL: "http://localhost:3000",
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        },
         });
     };
 
