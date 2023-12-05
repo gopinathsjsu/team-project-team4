@@ -1,7 +1,10 @@
 // Features.js
 import React from 'react';
+import { useAuth } from './AuthContext';
 
 const Features = () => {
+  const { auth } = useAuth();
+
   return (
     <section className="features">
       <div className="feature">
@@ -24,7 +27,7 @@ const Features = () => {
   */}
       <div className="feature">
       <a href='/memberships' className='link-'><h2>Membership</h2></a>
-        <p>Become a member and enjoy a variety of perks.</p>
+        <p>{!auth.isAuthenticated || (auth.isAuthenticated && auth.role === 'guest') ? 'Become a member and enjoy a variety of perks.' : 'Check out your member perks.'}</p>
       </div>
     </section>
   );

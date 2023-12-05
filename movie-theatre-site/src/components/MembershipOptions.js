@@ -37,7 +37,7 @@ export default function Membership_Options() {
   return (
     <>
       <div className="hero">
-        <h1><b>Become a member!</b></h1>
+        <h1>Membership</h1>
       </div>
       <div className="regular-membership-tile">
         <b>Regular membership - <i>FREE</i></b>
@@ -64,6 +64,13 @@ export default function Membership_Options() {
           )}
         </ul>
       </div>
+
+      <button className="membership-button">
+      {!auth.isAuthenticated || (auth.isAuthenticated && auth.role === 'guest') ?
+        (<Link to="/signup">Become a member</Link>) :
+        (<p>Do nothing</p>)}
+          {/*(<Link to="/profile">Update your membership</Link>)}*/} {/* Why does isAuth reset? */}  
+      </button>
     </>
   );
 }
