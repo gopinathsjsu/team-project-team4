@@ -1,8 +1,38 @@
-import { Link } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { useAuth } from './AuthContext';
 
+
 export default function Membership_Options() {
-  const { auth, setAuth } = useAuth();
+  const navigate = useNavigate();
+  const { auth } = useAuth();
+
+  const handleUpdate = async () => {
+    const member = {
+      role : "premium"
+    };
+    const token = localStorage.getItem('token');
+    try {
+      const response = await fetch(`/member/${auth.id}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        },
+        body: JSON.stringify(member)
+      });
+      const data = await response.json();
+      if (response.ok) {
+        alert('Congrats you are now a premium member!');
+        navigate('/profile');
+      } else {
+        alert(data.message);
+      }
+    } catch (error) {
+      console.error('There was an error in buying the premium membership:', error);
+      alert('There was an error in buying the premium membership.');
+    }
+  };
 
   return (
     <>
@@ -27,6 +57,11 @@ export default function Membership_Options() {
         <ul>
           <h2>All the perks of regular membership</h2>
           <h2><i>PLUS</i> online service fee waived for any booking!</h2>
+          {auth.isAuthenticated && auth.role === 'regular' && (
+          <div className="admin-controls">
+            <button style = {{marginLeft:450}} onClick={() => handleUpdate()}>Buy</button>
+          </div>
+          )}
         </ul>
       </div>
 

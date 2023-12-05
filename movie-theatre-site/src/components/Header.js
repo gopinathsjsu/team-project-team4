@@ -24,6 +24,7 @@ const Header = () => {
             {auth.isAuthenticated && auth.role === 'admin' && (
               <>
                 <Link to="/movie-analytics" className="link">Movie Analytics</Link>
+                <Link to="/location-analytics" className="link">Location Analytics</Link>
                 <Link to="/addmovie" className="link">Add Movie</Link>
                 <Link to="/addtheatre" className="link">Add Theatre</Link>
                 <Link to="/addscreen" className="link">Add Screen</Link>

@@ -1,14 +1,15 @@
 import React, { useState, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { useAuth } from './AuthContext';
 
 const TheatreLocations = () => {
   const [theatres, setTheatres] = useState([]);
   const navigate = useNavigate();
   const { auth } = useAuth();
+  const { id } = useParams();
 
   useEffect(() => {
-    fetch("/theatres")
+    fetch(`/locations/${id}`)
       .then((res) => res.json())
       .then((data) => setTheatres(data))
       .catch((error) =>
@@ -19,8 +20,12 @@ const TheatreLocations = () => {
   const handleDelete = async (theatreId) => {
     if (window.confirm("Are you sure you want to delete this movie?")) {
       try {
+        const token = localStorage.getItem('token');
         const response = await fetch(`/theatres/${theatreId}`, {
           method: 'DELETE',
+          headers: {
+            'Authorization': `Bearer ${token}`
+          },
         });
         if (response.ok) {
           setTheatres(theatres.filter((theatre) => theatre._id !== theatreId));
@@ -45,13 +50,13 @@ const TheatreLocations = () => {
 
   return (
     <div>
-      <div className="hero"><h1>Locations</h1></div>
+      <div className="hero"><h1>Theatres at {id}</h1></div>
       <ul>
         {theatres.map((location) => (
           <div className="theatre-tile">
             <li key={location._id}>
               <Link to={`/theatrelocations/${location._id}`}>
-                {location.theatreName} - <i>{location.city}</i>
+                {location.theatreName}
               </Link>
               {auth.isAuthenticated && auth.role === 'admin' && (
               <div className="admin-controls">

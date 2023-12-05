@@ -51,6 +51,24 @@ router.get('/member/:memberId/profile', async (req, res) => {
     }
 });
 
+router.put('/member/:memberId', async (req, res) => {
+    try {
+        const memberId = req.params.memberId;
+
+        const member = await Members.findByIdAndUpdate(memberId, req.body)
+
+        if (!member) {
+            return res.status(404).send('Member not found');
+        }
+        return res.status(200).json({ message : 'Member updated successfully.'});
+    } catch (error) {
+        console.error("Error occurred:", error.message);
+        console.error(error.stack);
+        res.status(500).send('Server error');
+    }
+});
+
+
 
 module.exports = router;
 
