@@ -25,31 +25,6 @@ const Profile = () => {
         const historyResponse = await fetch(`/member/${id}/movie-history`);
         const historyData = await historyResponse.json();
         setMovieHistory(historyData);
-
-        // Fetch tickets purchased
-        const ticketsResponse = await fetch(`/tickets`);
-        const ticketsData = await ticketsResponse.json();
-        setMyTickets(ticketsData.filter((ticket) => ticket.memberid === id));
-
-        let ticketData = {};
-        for (let i = 0; i < myTickets.length; i++) {
-          console.log(myTickets[i]);
-          const showtimeResponse = await fetch(
-            `/showtimes/${myTickets[i].showid}`
-          );
-          const showtime = await showtimeResponse.json();
-
-          const movieResponse = await fetch(`/movies/${showtime.movieid}`);
-          const movieData = await movieResponse.json();
-
-          ticketData[myTickets[i]._id] = {
-            ticket: myTickets[i],
-            show: showtime,
-            movie: movieData,
-          };
-        }
-        setTicketDetails(ticketData);
-        console.log(ticketDetails);
       } catch (error) {
         console.error("Error fetching data:", error);
       }
@@ -58,35 +33,84 @@ const Profile = () => {
     fetchMemberData();
   }, [id]);
 
+  useEffect(() => {
+    const fetchTickets = async () => {
+      try {
+        // Fetch tickets purchased
+        const ticketsResponse = await fetch(`/tickets`);
+        const ticketsResponseData = await ticketsResponse.json();
+        const filteredTickets = ticketsResponseData.filter((ticket) => ticket.memberid === id);
+
+        let memberTicketData = {};
+        for (let i = 0; i < filteredTickets.length; i++) {
+          console.log(filteredTickets[i]);
+          const showtimeResponse = await fetch(
+            `/showtimes/${filteredTickets[i].showid}`
+          );
+          const showtime = await showtimeResponse.json();
+          
+          const showDate = new Date(showtime.showDate).toISOString();
+          const currentTime = new Date().toISOString();
+          if (showDate < currentTime) {
+            console.log('This movie already started: ' + showtime.movieid);
+            continue;
+          }
+
+          const movieResponse = await fetch(`/movies/${showtime.movieid}`);
+          const movieData = await movieResponse.json();
+
+          memberTicketData[filteredTickets[i]._id] = {
+            ticket: filteredTickets[i],
+            show: showtime,
+            movie: movieData,
+          };
+        }
+        setTicketDetails(memberTicketData);
+      } catch (error) {
+        console.error("Error fetching member ticket data:", error);
+      }
+    };
+
+    fetchTickets();
+  }, [id, myTickets]);
+
   const toggleTickets = (ticketId) => {
     setExpandedTicket(expandedTicket === ticketId ? null : ticketId);
   };
 
   const handleCancel = async (ticketId) => {
-    if (window.confirm("Are you sure you want cancel your tickets for this movie?")) {
-      const token = localStorage.getItem('token');
+    if (
+      window.confirm(
+        "Are you sure you want cancel your tickets for this movie?"
+      )
+    ) {
+      const token = localStorage.getItem("token");
       try {
         const response = await fetch(`/tickets/${ticketId}`, {
-          method: 'DELETE',
-          headers: { 'Authorization': `Bearer ${token}` },
+          method: "DELETE",
+          headers: { Authorization: `Bearer ${token}` },
         });
         if (response.ok) {
-          const updatedTicketsResponse = await fetch(`/tickets`);
-          const updatedTicketsData = await updatedTicketsResponse.json();
-          setMyTickets(updatedTicketsData.filter((ticket) => ticket.memberid === id));
+          setMyTickets((prevTickets) =>
+            prevTickets.filter((ticket) => ticket._id !== ticketId)
+          );
 
-          const updatedTicketDetails = { ...ticketDetails };
-          delete updatedTicketDetails[ticketId];
-          setTicketDetails(updatedTicketDetails);
+          setTicketDetails((prevDetails) => {
+            const updatedDetails = { ...prevDetails };
+            delete updatedDetails[ticketId];
+            return updatedDetails;
+          });
 
-          alert("Your tickets were cancelled successfully. Payment was refunded to the original method.");
+          alert(
+            "Your tickets were cancelled successfully. Payment was refunded to the original method."
+          );
         } else {
           const data = await response.json();
           alert(data.message);
         }
       } catch (error) {
         console.error("There was an error cancelling your tickets:", error);
-        alert("There was an error cancelling your tickets.");
+        alert("There was an error cancelling your ticket.");
       }
     }
   };
@@ -132,50 +156,55 @@ const Profile = () => {
           <h2>My Tickets</h2>
           <ul className="purchased-tickets-list">
             {Object.keys(ticketDetails).length ? (
-              Object.entries(ticketDetails).map(([ticketId, ticketData]) => (
-                <li key={ticketId}>
-                  <button onClick={() => toggleTickets(ticketId)}>
-                    {ticketData.movie.movieName} -{" "}
-                    <i>
-                      {ticketData.show.showDate.split("-")[1]}/
-                      {ticketData.show.showDate.split("-")[2].substring(0, 2)}/
-                      {ticketData.show.showDate.split("-")[0]}
-                    </i>
-                    <span className="arrow">
-                      {expandedTicket === ticketId ? "▲" : "▼"}
-                    </span>
-                  </button>
-                  {expandedTicket === ticketId && (
-                    <div className="ticket-expanded-tile">
-                      <img
-                        src={ticketData.movie.img}
-                        alt={ticketData.movie.title}
-                        className="movie-image"
-                      />
-                      <div>
-                        <p>{ticketData.movie.description}</p>
-                        <p>
-                          <strong>Time: </strong>
-                          {ticketData.show.showStartTime}
-                        </p>
-                        <p>
-                          <strong>Seats: </strong>
-                          {ticketData.ticket.seatsBooked.join(",")}
-                        </p>
-                        <i>{ticketData.ticket.isPaymentViaRewards === true || ticketData.ticket.paymentMethod === "rewards" ?
-                        "Purchased with rewards points." : ""}</i>
+              Object.entries(ticketDetails).map(
+                ([ticketId, { movie, show, ticket }]) => (
+                  <li key={ticketId}>
+                    <button onClick={() => toggleTickets(ticketId)}>
+                      {movie.movieName} -{" "}
+                      <i>
+                        {show.showDate.split("-")[1]}/
+                        {show.showDate.split("-")[2].substring(0, 2)}/
+                        {show.showDate.split("-")[0]}
+                      </i>
+                      <span className="arrow">
+                        {expandedTicket === ticketId ? "▲" : "▼"}
+                      </span>
+                    </button>
+                    {expandedTicket === ticketId && (
+                      <div className="ticket-expanded-tile">
+                        <img
+                          src={movie.img}
+                          alt={movie.title}
+                          className="movie-image"
+                        />
+                        <div>
+                          <p>{movie.description}</p>
+                          <p>
+                            <strong>Time: </strong>
+                            {show.showStartTime}
+                          </p>
+                          <p>
+                            <strong>Seats: </strong>
+                            {ticket.seatsBooked.join(",")}
+                          </p>
+                          <i>
+                            {ticket.isPaymentViaRewards === true
+                              ? "Purchased with rewards points."
+                              : ""}
+                          </i>
+                        </div>
                       </div>
-                    </div>
-                  )}
-                  {expandedTicket === ticketId && (
-                    <div className="cancel-ticket">
-                      <button onClick={() => handleCancel(ticketId)}>
-                        Cancel Tickets
-                      </button>
-                    </div>
-                  )}
-                </li>
-              ))
+                    )}
+                    {expandedTicket === ticketId && (
+                      <div className="cancel-ticket">
+                        <button onClick={() => handleCancel(ticketId)}>
+                          Cancel Tickets
+                        </button>
+                      </div>
+                    )}
+                  </li>
+                )
+              )
             ) : (
               <li>You have no current movie tickets.</li>
             )}
