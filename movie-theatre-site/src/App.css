@@ -506,10 +506,6 @@ footer {
   font-family: 'Arial', sans-serif;
 }
 
-.purchased-tickets-list:hover {
-  background-color: #f0f0f0;
-}
-
 .ticket-expanded-tile {
   display: flex;
   gap: 16px;
