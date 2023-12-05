@@ -29,6 +29,8 @@ import MembershipOptions from './components/MembershipOptions';
 import Payment from './components/Payment';
 import PaymentOverview from './components/PaymentOverview';
 import UpdateMovie from './components/UpdateMovie';
+import Locations from './components/Locations';
+import LocationAnalytics from './components/LocationAnalytics';
 
 function App() {
   return (
@@ -38,7 +40,7 @@ function App() {
         <Route path='/dashboard' element={<Layout><Dashboard/></Layout>}/>
         <Route path='/login' element={<Layout><Login/></Layout>}/>
         <Route path='/signup' element={<Layout><Signup/></Layout>}/>
-        <Route path='/theatrelocations' element={<Layout><TheatreLocations/></Layout>}/>
+        <Route path='/theatres/:id' element={<Layout><TheatreLocations/></Layout>}/>
         <Route path='/movielistings' element={<Layout><MovieListings/></Layout>}/>
         <Route path='/showtimes' element={<Layout><Showtimes/></Layout>}/>
         <Route path='/about' element={<Layout><About/></Layout>}/>
@@ -60,6 +62,8 @@ function App() {
         <Route path='/addmovie' element={<AddMovie/>} />
         <Route path="/update-theatre/:id" element={<UpdateTheatre />} />
         <Route path="/screens/:id" element={<Screens />} />
+        <Route path="/locations" element={<Layout><Locations /></Layout>} />
+        <Route path="/location-analytics" element={<LocationAnalytics/>}/>
       </Routes>
     </AuthProvider>
   );

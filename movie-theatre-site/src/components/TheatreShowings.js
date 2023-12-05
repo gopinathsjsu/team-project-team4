@@ -54,6 +54,7 @@ const TheatreShowings = () => {
         </p>
       </div>
       {/* Movies and Showtimes information */}
+      <input type="date"/>
       <div>
         {Object.keys(movieShowtimes).length ? (
           Object.entries(movieShowtimes).map(([movieId, movieData]) => (
