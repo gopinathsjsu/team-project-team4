@@ -27,6 +27,7 @@ router.post('/api/signin', async (req, res) => {
             role: user.role,
             name: user.username, // Change to user.name if you have a name field
             email: user.email,
+            id: user._id
           },
           "secret", // Ensure you have this environment variable set
           { expiresIn: "3 days" }

@@ -42,7 +42,7 @@ router.post('/showtimes', mw.memberAuth, mw.checkRole(['admin']), async (request
     try {
         console.log(request.body);
         if (
-            !request.body.movieid || !request.body.showDate || !request.body.showStartTime || !request.body.price || !request.body.screen_id || !request.body.seats_booked 
+            !request.body.movieid || !request.body.showDate || !request.body.showStartTime || !request.body.price || !request.body.screen_id 
         ) {
             return response.status(400).send({
                 message : 'Send all required fields'
