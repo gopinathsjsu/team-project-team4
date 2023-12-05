@@ -506,6 +506,28 @@ footer {
   font-family: 'Arial', sans-serif;
 }
 
+.purchased-tickets-list:hover {
+  background-color: #f0f0f0;
+}
+
+.ticket-expanded-tile {
+  display: flex;
+  gap: 16px;
+  padding: 10px;
+  transition: transform 0.2s;
+}
+
+.cancel-ticket button {
+  background-color: #ff5722;
+  color: white;
+  display: block;
+  margin-left:auto;
+  margin-right:auto;
+  margin-top: 20px;
+  border-width: 10px;
+  border-color: #ff5722;
+}
+
 /* Membership Options page */
 .membership-title {
   background: none;
