@@ -104,6 +104,7 @@ const Profile = () => {
           alert(
             "Your tickets were cancelled successfully. Payment was refunded to the original method."
           );
+          window.location.reload();
         } else {
           const data = await response.json();
           alert(data.message);
