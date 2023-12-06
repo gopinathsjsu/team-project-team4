@@ -20,7 +20,6 @@ function Signup() {
 
   const registerApi = (body) => {
     return axios.post("/api/register", body, {
-      baseURL: "http://localhost:3000",
     });
   };
 
