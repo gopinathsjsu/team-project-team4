@@ -22,7 +22,7 @@
 #### Communication:
 ###### We communicated by meeting atleast 3 times a week and never miss a meeting to ensure we work together as a team. We all followed the same strategy for coding so that the code is understood by everyone.
 #### Simplicity:
-##### We wrote simple code bringing more value to a product, as it saves time and effort.
+##### We wrote simple code bringing more value to a product, as it saves time and effort. We worked on writing a simple code initially and improving upon it to make it more refined. 
 ## How to run the web-app:
 #### Step 1: Clone the app by command " git clone "
 #### Step 2: Go to the server directory and install node modules by command "npm i OR npm install"
