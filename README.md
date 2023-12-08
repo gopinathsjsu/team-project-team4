@@ -1,7 +1,7 @@
 # team-project-team4
 ## Team Members/Contributors
 #### -Sri Harsha Ponukumati(017423627)
-#### - Miranda Livengood(14929980)
+#### - Miranda Livengood(014929980)
 #### - Sai Kiran Kammari(17438226)
 #### - Maheedhar Reddy Bukkasamudram(17046939)
 ## Git Repo:
