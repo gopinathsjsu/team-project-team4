@@ -14,7 +14,7 @@
 #### Deployment
 ![deployment]([https://github.com/[username]/[reponame]/blob/[branch]/image.jpg?raw=true](https://github.com/gopinathsjsu/team-project-team4/main/images/deployment1.png?raw=true))
 #### Component
-![Component]([https://github.com/[username]/[reponame]/blob/[branch]/image.jpg?raw=true](https://github.com/gopinathsjsu/team-project-team4/main/images/component1.png?raw=true))
+![Component](images/component1.png)
 
 ## UI Wireframes:
 [https://drive.google.com/file/d/1AVT22UhzrQ7E6nFm_Tb3h8EJdqUhSUkq/view?usp=sharing](https://drive.google.com/file/d/1AVT22UhzrQ7E6nFm_Tb3h8EJdqUhSUkq/view?usp=sharing)
