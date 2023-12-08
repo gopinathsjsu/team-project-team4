@@ -12,7 +12,7 @@
 ## Team Sprint Task Sheet
 ## Diagrams:
 #### Deployment
-![deployment]([https://github.com/[username]/[reponame]/blob/[branch]/image.jpg?raw=true](https://github.com/gopinathsjsu/team-project-team4/main/images/deployment1.png?raw=true))
+![deployment](images/deployment1.png)
 #### Component
 ![Component](images/component1.png)
 
