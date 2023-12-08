@@ -7,9 +7,11 @@
 ## Team Contributions:
 ## Git Repo:
 [https://github.com/gopinathsjsu/team-project-team4](https://github.com/gopinathsjsu/team-project-team4)
-## Team Project Board:
+
 ## Team Project Journal
+[https://docs.google.com/document/d/1ckPqRZaKOvD5X7K1qU174mJnklwMOss6UIOoA8L7o6Y/edit?usp=sharing](https://docs.google.com/document/d/1ckPqRZaKOvD5X7K1qU174mJnklwMOss6UIOoA8L7o6Y/edit?usp=sharing)
 ## Team Sprint Task Sheet
+[https://docs.google.com/spreadsheets/d/19ZF0dMpmvXiuYmu4cl2r2PXSRL5ZET3w581F99te-k0/edit?usp=sharing](https://docs.google.com/spreadsheets/d/19ZF0dMpmvXiuYmu4cl2r2PXSRL5ZET3w581F99te-k0/edit?usp=sharing)
 ## Diagrams:
 #### Deployment
 ![deployment](images/deployment1.png)
