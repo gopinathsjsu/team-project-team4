@@ -65,12 +65,10 @@ export default function Membership_Options() {
         </ul>
       </div>
 
-      <button className="membership-button">
-      {!auth.isAuthenticated || (auth.isAuthenticated && auth.role === 'guest') ?
-        (<Link to="/signup">Become a member</Link>) :
-        (<p>Do nothing</p>)}
-          {/*(<Link to="/profile">Update your membership</Link>)}*/} {/* Why does isAuth reset? */}  
-      </button>
+      
+      {!auth.isAuthenticated &&
+        (<button className="membership-button"><Link to="/signup">Become a member</Link></button>)}  
+      
     </>
   );
 }
