@@ -43,11 +43,11 @@ export default function Membership_Options() {
         <b>Regular membership - <i>FREE</i></b>
 
         <ul>
-          <h2>View your current tickets</h2>
-          <h2>Collect reward points and redeem for movie tickets</h2>
-          <h2>View your movie watch history</h2>
-          <h2>Book up to 8 seats for you and your friends</h2>
-          <h2>Cancel your tickets before showtime for a full refund</h2>
+          <p>View your current tickets</p>
+          <p>Collect reward points and redeem for movie tickets</p>
+          <p>View your movie watch history</p>
+          <p>Book up to 8 seats for you and your friends</p>
+          <p>Cancel your tickets before showtime for a full refund</p>
         </ul>
       </div>
 
@@ -55,8 +55,8 @@ export default function Membership_Options() {
         <b>Premium membership - <i>$15/year</i></b>
 
         <ul>
-          <h2>All the perks of regular membership</h2>
-          <h2><i>PLUS</i> online service fee waived for any booking!</h2>
+          <p>All the perks of regular membership</p>
+          <p><i>PLUS</i> online service fee waived for any booking!</p>
           {auth.isAuthenticated && auth.role === 'regular' && (
           <div className="admin-controls">
             <button style = {{marginLeft:450}} onClick={() => handleUpdate()}>Buy</button>
